@@ -1,6 +1,7 @@
 * {
     margin: 0;
     padding: 0;
+    outline-width: 0;
 }
 
 body {
@@ -359,4 +360,67 @@ hr {
 .friend img {
     border-radius: 50%;
     height: 50px;
+}
+
+#cover {
+    margin-bottom: 80px;
+    float: left;
+}
+
+#new-post {
+    float: right;
+    width: 300px;
+}
+
+#new-post-header {
+    background-color: #f1f1f1;
+    border-bottom: 1px solid #efefef;
+    color: #707070;
+    font-size: 20px;
+    padding: 10px;
+}
+
+#new-post-textarea {
+    width: 100%;
+    box-sizing: border-box;
+    height: 50px;
+    padding: 5px;
+    resize: none;
+}
+
+.post-button {
+    border: 0;
+    background-color: #25ad9f;
+    color: #fff;
+    padding: 7px 11px;
+    font-size: 13px;
+}
+
+.post-button:hover {
+    background-color: #1f8478;
+}
+
+#new-post-form {
+    background-color: #fff;
+    border: 1px solid #e6e6e6;
+    padding: 10px;
+}
+
+#cover-image {
+    position: absolute;
+}
+
+#cover-avatar {
+    width: 500px;
+    position: relative;
+    top: 50px;
+    color: #fff;
+    font-size: 25px;
+    font-weight: bold;
+    vertical-align: middle;
+    left: 50px;
+}
+
+#cover-avatar img {
+    border: 4px solid #fff;
 }
