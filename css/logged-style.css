@@ -5,9 +5,12 @@
 
 body {
     background-color: #f6f6f6;
-    font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+    font-family: "Calibri", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
 }
 
+input[type=submit] {
+    cursor: pointer;
+}
 input:focus {
     outline-width: 0;
 }
@@ -32,6 +35,10 @@ hr {
 .wrapper {
     width: 1100px;
     margin: 0 auto;
+}
+
+#avatar {
+    margin-right: 10px;
 }
 
 #avatar img {
@@ -74,8 +81,8 @@ hr {
 
 
 .search-input {
-    width: 274px;
-    padding: 5px 12px;
+    width: 200px;
+    padding: 8px 10px;
     border: 1px solid #efefef;
     background-color: #f7f7f7;
     margin-bottom: 5px;
@@ -90,10 +97,10 @@ hr {
     border: 0;
     background-color: #25ad9f;
     color: #fff;
-    padding: 6px 12px;
+    padding: 9px 12px;
     font-size: 13px;
     float: right;
-    margin-top: 12px;
+    margin-top: 9px;
 }
 
 .search-button:hover {
@@ -106,11 +113,12 @@ hr {
 }
 
 .feed {
-    width: 330px;
+    width: 380px;
     float: left;
-    margin-right: 50px;
+    margin-right: 20px;
     margin-bottom: 20px;
     background-color: #fff;
+
 }
 
 .feed-header {
@@ -122,27 +130,35 @@ hr {
 }
 
 .feed-header-right {
+    padding-top: 5px;
     margin-left: 60px;
-    line-height: 24px;
     color: #fff;
-    font-size: 13px;
+    font-size: 20px;
+    padding-bottom: 7px;
+}
+
+.feed-date {
+    font-size: 12px;
+    margin-top: -2px;
+    color: #91d6c9;
 }
 
 .feed-content {
-    border: 1px solid #d8d6d6;
+    border: 1px solid #e6e6e6;
+    border-top: 0;
 }
 
 .feed-content p{
-    font-size: 14px;
-    color: #333;
+    font-size: 15px;
+    color: #555;
     float: left;
-    padding: 7px;
+    padding: 7px 12px;
 }
 
 .view-all-comments {
     padding: 3px 5px;
-    border-top: 1px solid #d8d6d6;
-    border-bottom: 1px solid #d8d6d6;
+    border-top: 1px solid #e6e6e6;
+    border-bottom: 1px solid #e6e6e6;
 }
 
 .view-all-comments a {
@@ -160,7 +176,7 @@ hr {
 }
 
 .comment {
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #e6e6e6;
 }
 
 .comment-pic {
@@ -200,18 +216,28 @@ hr {
 
 .reply-input {
     background-color: #f7f7f7;
-    border: 1px solid #efefef;
+    border: 0;
+    border-bottom: 2px solid #efefef;
     padding: 6px 12px;
     font-size: 14px;
-    width: 239px;
+    width: 80%;
+    box-sizing: border-box;
     color: #25ad9f;
 }
 
 .reply-button {
     background-color: #25ad9f;
     border: 0;
-    padding: 7px;
+    padding: 6px 10px;
+    border-bottom: 2px solid #1f9d8e;
     color: #fff;
+    width: 17%;
+    box-sizing: border-box;
+}
+
+.reply-button:hover {
+    background-color: #1f9d8e;
+    border-bottom: 2px solid #229688;
 }
 
 .post-options {
@@ -220,14 +246,21 @@ hr {
     font-size: 14px;
 }
 
+.post-options .dot {
+    color: #ccc;
+    padding: 0 3px;
+}
+
 .likesCount, .commentsCount {
     color: #938f8f;
 }
 
 .post-options a {
-    color: #424242;
+    color: #666;
     font-size: 12px;
     text-decoration: none;
+    text-transform: uppercase;
+    font-weight: bold;
 }
 
 .post-options a:hover {
@@ -236,7 +269,7 @@ hr {
 
 #friends {
     float: right;
-    width: 280px;
+    width: 300px;
 }
 
 #friends-header {
@@ -275,15 +308,22 @@ hr {
     margin-bottom: 10px;
 }
 
-#friends-static {
-    font-size: 13px;
-    color: #ccc;
+#friends-search {
+    float: left;
     margin-bottom: 10px;
 }
 
+#friends-static {
+    font-size: 15px;
+    color: #ccc;
+    margin-top: 5px;
+    float: right;
+    text-transform: uppercase;
+}
+
 #friend-search {
-    width: 274px;
-    padding: 8px 12px;
+    width: 200px;
+    padding: 8px 10px;
     border: 1px solid #efefef;
     background-color: #fff;
     color: #333;
@@ -297,18 +337,23 @@ hr {
     margin-top: 10px;
 }
 
+#friend-list a .friend .friend-name {
+    color: #999;
+    font-weight: bold;
+}
+
 .friend {
     background-color: #fff;
-    width: 150px;
-    padding: 10px;
+    width: 96px;
+    padding: 20px 15px;
     text-align: center;
     word-wrap: break-word;
     float: left;
     margin: 10px 10px 10px 0;
 }
 
-.friend span {
-
+.friend:hover {
+    background-color: #ededed;
 }
 
 .friend img {

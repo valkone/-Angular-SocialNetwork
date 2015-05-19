@@ -19,14 +19,14 @@ input:focus {
 
 #main-container {
     width: 300px;
-    margin: 110px auto;
+    margin: 130px auto;
 }
 
 #main-title {
     padding-bottom: 10px;
     text-align: center;
-    font-size: 28px;
-    font-family: Arial, sans-serif;
+    font-size: 70px;
+    font-family: Georgia, sans-serif;
     color: #fff;
 }
 
@@ -39,22 +39,26 @@ input:focus {
 }
 
 #gender {
-    padding: 6px 12px;
-    border: 1px solid #efefef;
+    padding: 8px 10px;
+    border-bottom: 2px solid #efefef;
     background-color: #f7f7f7;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .input {
-    width: 274px;
-    padding: 6px 12px;
-    border: 1px solid #efefef;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 8px 10px;
+    border: 0;
+    border-bottom: 2px solid #efefef;
     background-color: #f7f7f7;
     margin-bottom: 5px;
     color: #333;
 }
 
 .input:focus {
-    border: 1px solid #afafaf;
+    border-bottom: 2px solid #e3e3e3;
 }
 
 .input-button {
@@ -89,19 +93,25 @@ input:focus {
 #main-navigation {
     text-align: center;
     color: #fff;
+    margin-top: 15px;
+}
+
+#main-navigation span {
+    margin: 0 10px;
+    color: #0c6658;
+    font-style: italic;
 }
 
 .main-button {
     text-decoration: none;
-    border: 1px solid #0c6658;
+    border-bottom: 2px solid #0c6658;
     background-color: #109684;
     color: #fff;
-    padding: 6px 12px;
+    padding: 12px 25px;
     border-radius: 2px;
-    font-size: 18px;
-    margin-top: 10px;
+    font-size: 20px;
 }
 
 .main-button:hover {
-    background-color: #15c1a7;
+    background-color: #119d8a;
 }
