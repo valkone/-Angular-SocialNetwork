@@ -85,3 +85,23 @@ input:focus {
 .form-menu a:hover {
     text-decoration: underline;
 }
+
+#main-navigation {
+    text-align: center;
+    color: #fff;
+}
+
+.main-button {
+    text-decoration: none;
+    border: 1px solid #0c6658;
+    background-color: #109684;
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 2px;
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+.main-button:hover {
+    background-color: #15c1a7;
+}
