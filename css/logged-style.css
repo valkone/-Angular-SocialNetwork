@@ -459,3 +459,60 @@ hr {
 .input-button:hover {
     background-color: #1f8478;
 }
+
+#edit-profile {
+    background: #fff;
+    width: 700px;
+    margin: 20px auto;
+}
+
+#edit-profile-left {
+    float: left;
+    padding: 20px;
+    text-align: center;
+}
+
+#avatar-specifications {
+    font-size: 13px;
+    color: #b7b7b7;
+}
+
+#edit-profile-left button {
+    margin-left: 35px;
+}
+
+#edit-profile-right {
+    float: right;
+    padding: 20px;
+    width: 460px;
+}
+
+#gender {
+    padding: 8px 10px;
+    border-bottom: 2px solid #efefef;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#change-cover {
+    margin-top: 20px;
+}
+
+#change-cover-left {
+    float: left;
+}
+
+#change-cover-right {
+    float: right;
+}
+
+#cover-specifications {
+    width: 90px;
+    font-size: 13px;
+    color: #b7b7b7;
+    margin-left: 7px;
+}
+
+#save-changes-button {
+    float: right;
+}

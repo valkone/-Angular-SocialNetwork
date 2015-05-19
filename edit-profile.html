@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Social Network Home</title>
+    <link rel="stylesheet" type="text/css" href="css/logged-style.css" />
+</head>
+<body>
+<div id="header">
+    <div class="wrapper">
+        <span id="avatar">
+            <img src="images/avatar.jpg" />
+        </span>
+        <div id="menu">
+            <ul>
+                <li><a href="#">Messages <span>(100)</span></a></li>
+                <li><a href="#">Friend Requests <span>(10)</span></a></li>
+                <li><a href="#">Settings</a></li>
+                <li><a href="#">Logout</a></li>
+            </ul>
+        </div>
+        <div id="search">
+            <form>
+                <input type="text" placeholder="Search..." class="search-input" />
+                <input type="submit" value="Search" class="search-button" />
+            </form>
+        </div>
+    </div>
+</div>
+<div class="wrapper">
+    <div id="page-title">Edit Profile</div>
+    <hr />
+
+    <div id="edit-profile">
+        <div id="edit-profile-left">
+            <img src="images/avatar.jpg" width="150" height="150" />
+            <div id="avatar-specifications">
+                Allowed format: .jpg<br />
+                Limit: 128kb
+            </div>
+            <button class="input-button">UPLOAD</button>
+        </div>
+        <div id="edit-profile-right">
+            <input type="text" placeholder="Name" class="input" /><br />
+            <input type="password" placeholder="Email" class="input" /><br />
+            <div id="gender">
+                <p>Gender:</p>
+                <input type="radio" name="gender" /> Male
+                <input type="radio" name="gender" /> Female
+                <input type="radio" name="gender" /> Other
+            </div>
+            <div id="change-cover">
+                <div id="change-cover-left">
+                    <button class="input-button">UPLOAD</button>
+                    <div id="cover-specifications">
+                        Limit: 128kb
+                    </div>
+                </div>
+                <div id="change-cover-right">
+                    <img src="images/cover.jpg" width="360" height="90" />
+                </div>
+            </div>
+            <div class="clear"></div>
+            <button id="save-changes-button" class="input-button">SAVE CHANGES</button>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+</body>
+</html>
