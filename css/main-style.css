@@ -1,0 +1,80 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: url('../images/home-background.jpg') repeat;
+}
+
+input:focus {
+    outline-width: 0;
+}
+
+#main-container {
+    width: 300px;
+    margin: 110px auto;
+}
+
+#main-title {
+    padding-bottom: 10px;
+    padding-left: 50px;
+    font-size: 28px;
+    font-family: Arial, sans-serif;
+    color: #fff;
+}
+
+#login {
+    width: 300px;
+    background-color: #fff;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+.input {
+    width: 274px;
+    padding: 6px 12px;
+    border: 1px solid #efefef;
+    background-color: #f7f7f7;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.input:focus {
+    border: 1px solid #afafaf;
+}
+
+.input-button {
+    border: 0;
+    background-color: #25ad9f;
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 2px;
+    font-size: 14px;
+    float: left;
+    margin-top: 10px;
+}
+
+.input-button:hover {
+    background-color: #1f8478;
+}
+
+.clear {
+    content: "";
+    height: 0;
+    clear: both;
+}
+
+.form-menu {
+    float: right;
+    margin-top: 20px;
+}
+
+.form-menu a {
+    color: #25ad9f;
+    text-decoration: none;
+}
+
+.form-menu a:hover {
+    text-decoration: underline;
+}
