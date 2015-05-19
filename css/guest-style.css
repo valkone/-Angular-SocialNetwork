@@ -11,6 +11,12 @@ input:focus {
     outline-width: 0;
 }
 
+.clear {
+    content: "";
+    height: 0;
+    clear: both;
+}
+
 #main-container {
     width: 300px;
     margin: 110px auto;
@@ -64,12 +70,6 @@ input:focus {
 
 .input-button:hover {
     background-color: #1f8478;
-}
-
-.clear {
-    content: "";
-    height: 0;
-    clear: both;
 }
 
 .form-menu {
