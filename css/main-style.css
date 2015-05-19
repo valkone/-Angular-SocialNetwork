@@ -18,17 +18,24 @@ input:focus {
 
 #main-title {
     padding-bottom: 10px;
-    padding-left: 50px;
+    text-align: center;
     font-size: 28px;
     font-family: Arial, sans-serif;
     color: #fff;
 }
 
-#login {
+#box {
     width: 300px;
     background-color: #fff;
     margin: 0 auto;
     padding: 10px;
+    color: #777;
+}
+
+#gender {
+    padding: 6px 12px;
+    border: 1px solid #efefef;
+    background-color: #f7f7f7;
 }
 
 .input {
