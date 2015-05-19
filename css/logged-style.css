@@ -18,6 +18,11 @@ input:focus {
     clear: both;
 }
 
+hr {
+    border: 0;
+    border-bottom: 1px solid #dbdbdb;
+}
+
 #header {
     background-color: #303030;
     padding: 10px 0;
@@ -263,4 +268,50 @@ input:focus {
 
 .friend-review img {
     width: 83px;
+}
+
+#page-title {
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+
+#friends-static {
+    font-size: 13px;
+    color: #ccc;
+    margin-bottom: 10px;
+}
+
+#friend-search {
+    width: 274px;
+    padding: 8px 12px;
+    border: 1px solid #efefef;
+    background-color: #fff;
+    color: #333;
+}
+
+.search-input:focus {
+    border: 1px solid #afafaf;
+}
+
+#friend-list {
+    margin-top: 10px;
+}
+
+.friend {
+    background-color: #fff;
+    width: 150px;
+    padding: 10px;
+    text-align: center;
+    word-wrap: break-word;
+    float: left;
+    margin: 10px 10px 10px 0;
+}
+
+.friend span {
+
+}
+
+.friend img {
+    border-radius: 50%;
+    height: 50px;
 }
