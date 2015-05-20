@@ -1,20 +1,20 @@
 <div id="main-container">
     <div id="main-title" class="center">Register</div>
     <div id="box">
-        <form>
-            <input type="text" placeholder="Username" class="input" /><br />
-            <input type="password" placeholder="Password" class="input" /><br />
-            <input type="password" placeholder="Confirm password" class="input" /><br />
-            <input type="password" placeholder="Name" class="input" /><br />
-            <input type="password" placeholder="Email" class="input" /><br />
-            <div id="gender">
+        <form ng-controller="AuthenticationController" ng-submit="register()">
+            <input type="text" placeholder="Username" ng-model="registerData.username" class="input" /><br />
+            <input type="password" placeholder="Password" ng-model="registerData.password" class="input" /><br />
+            <input type="password" placeholder="Confirm password" ng-model="registerData.confirmPassword" class="input" /><br />
+            <input type="text" placeholder="Name" ng-model="registerData.name" class="input" /><br />
+            <input type="text" placeholder="Email" ng-model="registerData.email" class="input" /><br />
+            <div id="gender" ng-model="registerData.gender" >
                 <p>Gender:</p>
                 <input type="radio" name="gender" /> Male
                 <input type="radio" name="gender" /> Female
                 <input type="radio" name="gender" /> Other
             </div>
             <div class="clear"></div>
-            <input type="button" class="input-button" value="Register" />
+            <input type="submit" class="input-button" value="Register" />
             <div class="form-menu"><a href="#/login">Login</a></div>
             <div class="clear"></div>
         </form>

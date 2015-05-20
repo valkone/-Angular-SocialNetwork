@@ -1,10 +1,10 @@
 <div id="main-container">
     <div id="main-title">Login</div>
     <div id="box">
-        <form>
-            <input type="text" placeholder="Username" class="input" /><br />
-            <input type="password" placeholder="Password" class="input" /><br />
-            <input type="button" class="input-button" value="Login" />
+        <form ng-controller="AuthenticationController" ng-submit="login()">
+            <input type="text" placeholder="Username" ng-model="loginData.username" class="input" /><br />
+            <input type="password" placeholder="Password" ng-model="loginData.password" class="input" /><br />
+            <input type="submit" class="input-button" value="Login" />
             <div class="form-menu"><a href="#/register">Register</a></div>
             <div class="clear"></div>
         </form>

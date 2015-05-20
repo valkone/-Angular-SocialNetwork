@@ -1,6 +1,6 @@
 var app = angular.module('SocialNetworkApp', ['ngRoute', 'ngResource']);
 
-app.constant('baseServiceUrl', 'http://softuni-ads.azurewebsites.net');
+app.constant('baseServiceUrl', 'http://softuni-social-network.azurewebsites.net');
 
 app.config(function ($routeProvider) {
     $routeProvider.when('/', {
