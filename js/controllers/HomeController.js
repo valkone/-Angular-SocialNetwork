@@ -1,6 +1,4 @@
-app.controller('HomeController', function($scope, authentication){
-    //$scope.logged = authentication.IsLoggedIn();
-
+app.controller('HomeController', function($scope, authentication) {
     if(localStorage['accessToken'] != undefined) {
         document.body.style.backgroundImage = "";
         document.body.style.backgroundColor = "#f6f6f6";

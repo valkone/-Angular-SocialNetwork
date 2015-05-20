@@ -1,9 +1,9 @@
 <header ng-include="'templates/partial/header.html'"></header>
 
-<div class="wrapper"  ng-controller="HomeController">
+<div class="wrapper">
     <div id="page-title">News Feed</div>
     <div id="news-feed">
-        <div class="feed">
+        <div class="feed" ng-repeat="feed in feeds">
             <div class="feed-header">
                 <div class="feed-header-left">
                     <div class="feed-pic">
@@ -11,36 +11,31 @@
                     </div>
                 </div>
                 <div class="feed-header-right">
-                    <div class="feed-name">Ivan</div>
-                    <div class="feed-date">20-2-2015</div>
+                    <div class="feed-name">{{feed.author.username}}</div>
+                    <div class="feed-date">{{feed.date}}</div>
                 </div>
             </div>
             <div class="feed-content">
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Ad blanditiis perspiciatis praesentium quaerat repudiandae soluta? Cum doloribus esse et eum
-                </p>
-                <div class="clear"></div>
-
+                <p>{{feed.postContent}}</p>
                 <div class="clear"></div>
                 <div class="view-all-comments">
-                    <a href="#">View all <span>10 comments</span></a>
-                        <span class="post-options">
-                            <span class="likesCount">3</span> <a href="#">Like</a> <span class="dot">•</span>
-                            <span class="commentsCount">300</span> <a href="#">Comment</a>
-                        </span>
+                    <a ng-if="feed.totalCommentsCount > 3" href="javascript: void(0);" ng-click="showAllComments(feed.id)">View all <span>{{feed.totalCommentsCount}} comments</span></a>
+                        <div class="post-options">
+                            <span class="likesCount">{{feed.likesCount}}</span> <a href="javascript: void(0);" ng-click="likePost(feed.id)">Like</a>
+                        </div>
+                        <div class="clear"></div>
                 </div>
                 <div class="comments">
-                    <div class="comment">
+                    <div class="comment" ng-repeat="comment in feed.comments">
                         <div class="comment-pic">
-                            <img src="images/user.jpg" height="35px" />
+                            <img src="images/user.jpg" ng-if="comment.author.profileImageData" height="35px" />
+                            <img src="images/no-avatar.png" ng-if="!comment.author.profileImageData" height="35px" />
                         </div>
                         <div class="comment-right">
                             <div class="comment-header">
-                                <span class="comment-name"><a href="#">Stoyan</a></span>
-                                <span class="comment-date">2.20.2015</span>
-                                <div class="comment-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                    Ad blanditiis perspiciatis praesentium quaerat repudiandae soluta? Cum doloribus esse et eum</div>
+                                <span class="comment-name"><a href="#">{{comment.author.name}}</a></span>
+                                <span class="comment-date">{{comment.date}}</span>
+                                <div class="comment-content">{{comment.commentContent}}</div>
                             </div>
                         </div>
                         <div class="clear"></div>
@@ -48,161 +43,8 @@
                 </div>
                 <div class="post-reply">
                     <form>
-                        <input type="text" class="reply-input" placeholder="Comment" />
-                        <input type="submit" value="Reply" class="reply-button" />
-                    </form>
-                </div>
-            </div>
-        </div>
-        <div class="feed">
-            <div class="feed-header">
-                <div class="feed-header-left">
-                    <div class="feed-pic">
-                        <img src="images/avatar.jpg" height="48px" />
-                    </div>
-                </div>
-                <div class="feed-header-right">
-                    <div class="feed-name">Ivan</div>
-                    <div class="feed-date">20-2-2015</div>
-                </div>
-            </div>
-            <div class="feed-content">
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Ad blanditiis perspiciatis praesentium quaerat repudiandae soluta? Cum doloribus esse et eum
-                </p>
-                <div class="clear"></div>
-
-                <div class="clear"></div>
-                <div class="view-all-comments">
-                    <a href="#">View all <span>10 comments</span></a>
-                        <span class="post-options">
-                            <span class="likesCount">3</span> <a href="#">Like</a> <span class="dot">•</span>
-                            <span class="commentsCount">300</span> <a href="#">Comment</a>
-                        </span>
-                </div>
-                <div class="comments">
-                    <div class="comment">
-                        <div class="comment-pic">
-                            <img src="images/user.jpg" height="35px" />
-                        </div>
-                        <div class="comment-right">
-                            <div class="comment-header">
-                                <span class="comment-name"><a href="#">Stoyan</a></span>
-                                <span class="comment-date">2.20.2015</span>
-                                <div class="comment-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                    Ad blanditiis perspiciatis praesentium quaerat repudiandae soluta? Cum doloribus esse et eum</div>
-                            </div>
-                        </div>
-                        <div class="clear"></div>
-                    </div>
-                </div>
-                <div class="post-reply">
-                    <form>
-                        <input type="text" class="reply-input" placeholder="Comment" />
-                        <input type="submit" value="Reply" class="reply-button" />
-                    </form>
-                </div>
-            </div>
-        </div>
-        <div class="feed">
-            <div class="feed-header">
-                <div class="feed-header-left">
-                    <div class="feed-pic">
-                        <img src="images/avatar.jpg" height="48px" />
-                    </div>
-                </div>
-                <div class="feed-header-right">
-                    <div class="feed-name">Ivan</div>
-                    <div class="feed-date">20-2-2015</div>
-                </div>
-            </div>
-            <div class="feed-content">
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Ad blanditiis perspiciatis praesentium quaerat repudiandae soluta? Cum doloribus esse et eum
-                </p>
-                <div class="clear"></div>
-
-                <div class="clear"></div>
-                <div class="view-all-comments">
-                    <a href="#">View all <span>10 comments</span></a>
-                        <span class="post-options">
-                            <span class="likesCount">3</span> <a href="#">Like</a> <span class="dot">•</span>
-                            <span class="commentsCount">300</span> <a href="#">Comment</a>
-                        </span>
-                </div>
-                <div class="comments">
-                    <div class="comment">
-                        <div class="comment-pic">
-                            <img src="images/user.jpg" height="35px" />
-                        </div>
-                        <div class="comment-right">
-                            <div class="comment-header">
-                                <span class="comment-name"><a href="#">Stoyan</a></span>
-                                <span class="comment-date">2.20.2015</span>
-                                <div class="comment-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                    Ad blanditiis perspiciatis praesentium quaerat repudiandae soluta? Cum doloribus esse et eum</div>
-                            </div>
-                        </div>
-                        <div class="clear"></div>
-                    </div>
-                </div>
-                <div class="post-reply">
-                    <form>
-                        <input type="text" class="reply-input" placeholder="Comment" />
-                        <input type="submit" value="Reply" class="reply-button" />
-                    </form>
-                </div>
-            </div>
-        </div>
-        <div class="feed">
-            <div class="feed-header">
-                <div class="feed-header-left">
-                    <div class="feed-pic">
-                        <img src="images/avatar.jpg" height="48px" />
-                    </div>
-                </div>
-                <div class="feed-header-right">
-                    <div class="feed-name">Ivan</div>
-                    <div class="feed-date">20-2-2015</div>
-                </div>
-            </div>
-            <div class="feed-content">
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Ad blanditiis perspiciatis praesentium quaerat repudiandae soluta? Cum doloribus esse et eum
-                </p>
-                <div class="clear"></div>
-
-                <div class="clear"></div>
-                <div class="view-all-comments">
-                    <a href="#">View all <span>10 comments</span></a>
-                        <span class="post-options">
-                            <span class="likesCount">3</span> <a href="#">Like</a> <span class="dot">•</span>
-                            <span class="commentsCount">300</span> <a href="#">Comment</a>
-                        </span>
-                </div>
-                <div class="comments">
-                    <div class="comment">
-                        <div class="comment-pic">
-                            <img src="images/user.jpg" height="35px" />
-                        </div>
-                        <div class="comment-right">
-                            <div class="comment-header">
-                                <span class="comment-name"><a href="#">Stoyan</a></span>
-                                <span class="comment-date">2.20.2015</span>
-                                <div class="comment-content">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                    Ad blanditiis perspiciatis praesentium quaerat repudiandae soluta? Cum doloribus esse et eum</div>
-                            </div>
-                        </div>
-                        <div class="clear"></div>
-                    </div>
-                </div>
-                <div class="post-reply">
-                    <form>
-                        <input type="text" class="reply-input" placeholder="Comment" />
-                        <input type="submit" value="Reply" class="reply-button" />
+                        <input type="text" class="reply-input" ng-model="comment" placeholder="Comment" />
+                        <input type="submit" value="Reply" ng-click="postComment(feed.id)" class="reply-button" />
                     </form>
                 </div>
             </div>
@@ -213,23 +55,9 @@
             Friends - <a href="#">5</a> total
         </div>
         <div id="friends-list-small">
-            <div class="friend-review">
-                <img src="images/user.jpg" />
-            </div>
-            <div class="friend-review">
-                <img src="images/user.jpg" />
-            </div>
-            <div class="friend-review">
-                <img src="images/user.jpg" />
-            </div>
-            <div class="friend-review">
-                <img src="images/user.jpg" />
-            </div>
-            <div class="friend-review">
-                <img src="images/user.jpg" />
-            </div>
-            <div class="friend-review">
-                <img src="images/user.jpg" />
+            <div class="friend-review" ng-repeat="friend in friends.friends">
+                 <img src="images/user.jpg" />
+                {{friend.name}}
             </div>
         </div>
     </div>

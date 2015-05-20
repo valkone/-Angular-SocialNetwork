@@ -17,7 +17,7 @@ app.config(function ($routeProvider) {
     });
     $routeProvider.when('/home', {
         templateUrl: 'templates/partial/feed.html',
-        controller: 'HomeController'
+        controller: 'FeedController'
     });
     $routeProvider.when('/settings/password', {
         templateUrl: 'templates/partial/change-password.html',
