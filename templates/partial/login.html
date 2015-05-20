@@ -6,7 +6,7 @@
             <span ng-show="form.username.$error.required && form.username.$dirty">
                     Invalid username<br />
             </span>
-            <input type="password" placeholder="Password" name="password" ng-model="loginData.password" class="input" password /><br />
+            <input type="password" placeholder="Password" name="password" ng-model="loginData.password" class="input" password=""/><br />
             <span ng-show="form.password.$error.password && form.password.$dirty">
                     Minimum password length: 6<br />
             </span>

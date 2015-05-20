@@ -1,4 +1,4 @@
-<div id="header">
+<div id="header" ng-controller="AuthenticationController">
     <div class="wrapper">
             <span id="avatar">
                 <img src="images/avatar.jpg" />
@@ -8,7 +8,7 @@
                 <li><a href="#">Messages <span>(100)</span></a></li>
                 <li><a href="#">Friend Requests <span>(10)</span></a></li>
                 <li><a href="#">Settings</a></li>
-                <li><a href="#">Logout</a></li>
+                <li><a href="javascript: void(0);" ng-click="logout()">Logout</a></li>
             </ul>
         </div>
         <div id="search">

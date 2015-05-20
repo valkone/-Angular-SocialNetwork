@@ -5,8 +5,11 @@
 }
 
 body {
-    background-color: #f6f6f6;
     font-family: "Calibri", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+}
+
+input:focus {
+    outline-width: 0;
 }
 
 input[type=submit] {
@@ -16,15 +19,122 @@ input:focus {
     outline-width: 0;
 }
 
+hr {
+    border: 0;
+    border-bottom: 1px solid #dbdbdb;
+}
+
 .clear {
     content: "";
     height: 0;
     clear: both;
 }
 
-hr {
+#main-container {
+    width: 300px;
+    margin: 110px auto;
+}
+
+#main-title {
+    padding-bottom: 10px;
+    text-align: center;
+    font-size: 70px;
+    font-family: Georgia, sans-serif;
+    color: #fff;
+}
+
+#box {
+    width: 300px;
+    background-color: #fff;
+    margin: 0 auto;
+    padding: 10px;
+    color: #777;
+}
+
+#gender {
+    padding: 8px 10px;
+    border-bottom: 2px solid #efefef;
+    background-color: #f7f7f7;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 8px 10px;
     border: 0;
-    border-bottom: 1px solid #dbdbdb;
+    border-bottom: 2px solid #efefef;
+    background-color: #f7f7f7;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.input:focus {
+    border-bottom: 2px solid #e3e3e3;
+}
+
+.input-button {
+    border: 0;
+    background-color: #25ad9f;
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 2px;
+    font-size: 14px;
+    float: left;
+    margin-top: 10px;
+}
+
+.input-button:hover {
+    background-color: #1f8478;
+}
+
+.input-button:disabled {
+    background-color: #ccc;
+}
+
+.input-button:disabled:hover {
+    background-color: #ccc;
+}
+
+.form-menu {
+    float: right;
+    margin-top: 20px;
+}
+
+.form-menu a {
+    color: #25ad9f;
+    text-decoration: none;
+}
+
+.form-menu a:hover {
+    text-decoration: underline;
+}
+
+#main-navigation {
+    text-align: center;
+    color: #fff;
+    margin-top: 15px;
+}
+
+#main-navigation span {
+    margin: 0 10px;
+    color: #0c6658;
+    font-style: italic;
+}
+
+.main-button {
+    text-decoration: none;
+    border-bottom: 2px solid #0c6658;
+    background-color: #109684;
+    color: #fff;
+    padding: 12px 25px;
+    border-radius: 2px;
+    font-size: 20px;
+}
+
+.main-button:hover {
+    background-color: #119d8a;
 }
 
 #header {

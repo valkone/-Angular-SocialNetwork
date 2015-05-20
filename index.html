@@ -1,14 +1,11 @@
 <!DOCTYPE HTML>
-<html ng-app="SocialNetworkApp">
+<html ng-app="SocialNetworkApp" ng-controller="HomeController">
 <head>
     <meta charset="UTF-8">
     <title>Social Network</title>
-    <link ng-if="1" rel="stylesheet" href="css/guest-style.css"/>
-    <link rel="stylesheet" href="css/logged-style.css"/>
+    <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-<header ng-if="0" ng-include="'templates/partial/header.html'"></header>
-
 <div ng-view></div>
 
 <script type="text/javascript" src="lib/angular/angular.js"></script>

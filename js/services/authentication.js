@@ -61,7 +61,7 @@ app.factory('authentication', function ($http, baseServiceUrl) {
         };
     };
 
-    service.isLoggedIn = function () {
+    service.IsLoggedIn = function () {
         return localStorage['accessToken'];
     };
 

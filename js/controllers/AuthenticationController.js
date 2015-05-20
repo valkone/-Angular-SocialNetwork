@@ -1,6 +1,4 @@
-app.controller('AuthenticationController', function($scope, $location, $route,
-        authentication){
-
+app.controller('AuthenticationController', function($scope, $location, $route, authentication) {
     var ClearData = function () {
         $scope.loginData = "";
         $scope.registerData = "";
@@ -30,5 +28,11 @@ app.controller('AuthenticationController', function($scope, $location, $route,
             function (serverError) {
                 console.error(serverError);
             });
+    };
+
+    $scope.logout = function () {
+        ClearData();
+        authentication.ClearCredentials();
+        $location.path('/');
     };
 });
