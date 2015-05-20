@@ -1,9 +1,15 @@
 <div id="main-container">
     <div id="main-title">Login</div>
     <div id="box">
-        <form ng-controller="AuthenticationController" ng-submit="login()">
-            <input type="text" placeholder="Username" ng-model="loginData.username" class="input" /><br />
-            <input type="password" placeholder="Password" ng-model="loginData.password" class="input" /><br />
+        <form name="form" ng-controller="AuthenticationController" ng-submit="login()">
+            <input type="text" placeholder="Username" name="username"  ng-model="loginData.username" class="input" required /><br />
+            <span ng-show="form.username.$error.required && form.username.$dirty">
+                    Invalid username<br />
+            </span>
+            <input type="password" placeholder="Password" name="password" ng-model="loginData.password" class="input" password /><br />
+            <span ng-show="form.password.$error.password && form.password.$dirty">
+                    Minimum password length: 6<br />
+            </span>
             <input type="submit" class="input-button" value="Login" />
             <div class="form-menu"><a href="#/register">Register</a></div>
             <div class="clear"></div>

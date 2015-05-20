@@ -1,12 +1,27 @@
 <div id="main-container">
     <div id="main-title" class="center">Register</div>
     <div id="box">
-        <form ng-controller="AuthenticationController" ng-submit="register()">
-            <input type="text" placeholder="Username" ng-model="registerData.username" class="input" /><br />
-            <input type="password" placeholder="Password" ng-model="registerData.password" class="input" /><br />
-            <input type="password" placeholder="Confirm password" ng-model="registerData.confirmPassword" class="input" /><br />
-            <input type="text" placeholder="Name" ng-model="registerData.name" class="input" /><br />
-            <input type="text" placeholder="Email" ng-model="registerData.email" class="input" /><br />
+        <form name="form" ng-controller="AuthenticationController" ng-submit="register()">
+            <input type="text" placeholder="Username" name="username" ng-model="registerData.username" class="input" required /><br />
+            <span ng-show="form.username.$error.required && form.username.$dirty">
+                    Invalid username<br />
+            </span>
+            <input type="password" placeholder="Password" name="password" ng-model="registerData.password" class="input" password /><br />
+            <span ng-show="form.password.$error.password && form.password.$dirty">
+                    Minimum password length: 6<br />
+            </span>
+            <input type="password" placeholder="Confirm password" name="confirmPassword" ng-model="registerData.confirmPassword" class="input" confirmpassword /><br />
+            <span ng-show="form.confirmPassword.$error.confirmpassword && form.confirmPassword.$dirty">
+                    Passwords did not match<br />
+            </span>
+            <input type="text" placeholder="Name" name="name" ng-model="registerData.name" class="input" required /><br />
+            <span ng-show="form.name.$error.required && form.name.$dirty">
+                    Invalid name<br />
+            </span>
+            <input type="text" placeholder="Email" name="email" ng-model="registerData.email" class="input" emailfield/><br />
+            <span ng-show="form.email.$error.emailfield && form.email.$dirty">
+                    Invalid email<br />
+            </span>
             <div id="gender" ng-model="registerData.gender" >
                 <p>Gender:</p>
                 <input type="radio" name="gender" /> Male
