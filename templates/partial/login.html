@@ -10,7 +10,7 @@
             <span ng-show="form.password.$error.password && form.password.$dirty">
                     Minimum password length: 6<br />
             </span>
-            <input type="submit" class="input-button" value="Login" />
+            <input type="submit" class="input-button" ng-disabled="!form.$valid" value="Login" />
             <div class="form-menu"><a href="#/register">Register</a></div>
             <div class="clear"></div>
         </form>

@@ -40,8 +40,7 @@ app.factory('authentication', function ($http, baseServiceUrl) {
 
     service.SetCredentials = function (serverData) {
         localStorage['accessToken'] = serverData.access_token;
-        localStorage['username'] = serverData.username;
-        localStorage['isAdmin'] = serverData.isAdmin ? serverData.isAdmin : false;
+        localStorage['username'] = serverData.userName;
     };
 
     service.GetUsername = function () {

@@ -1,10 +1,19 @@
 app.controller('AuthenticationController', function($scope, $location, $route,
         authentication){
 
+    var ClearData = function () {
+        $scope.loginData = "";
+        $scope.registerData = "";
+        $scope.userData = "";
+        $scope.passwordData = "";
+    };
+
     $scope.register = function () {
         authentication.Register($scope.registerData,
             function(serverData) {
-                console.log(serverData);
+                authentication.SetCredentials(serverData);
+                ClearData();
+                $location.path('/home');
             },
             function (serverError) {
                 console.error(serverError);
@@ -14,7 +23,9 @@ app.controller('AuthenticationController', function($scope, $location, $route,
     $scope.login = function () {
         authentication.Login($scope.loginData,
             function(serverData) {
-                console.log(serverData);
+                authentication.SetCredentials(serverData);
+                ClearData();
+                $location.path('/home');
             },
             function (serverError) {
                 console.error(serverError);

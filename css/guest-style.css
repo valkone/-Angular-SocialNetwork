@@ -76,6 +76,14 @@ input:focus {
     background-color: #1f8478;
 }
 
+.input-button:disabled {
+    background-color: #ccc;
+}
+
+.input-button:disabled:hover {
+    background-color: #ccc;
+}
+
 .form-menu {
     float: right;
     margin-top: 20px;

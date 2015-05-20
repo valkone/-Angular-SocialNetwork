@@ -29,7 +29,7 @@
                 <input type="radio" name="gender" /> Other
             </div>
             <div class="clear"></div>
-            <input type="submit" class="input-button" value="Register" />
+            <input type="submit" class="input-button" ng-disabled="!form.$valid" value="Register" />
             <div class="form-menu"><a href="#/login">Login</a></div>
             <div class="clear"></div>
         </form>
