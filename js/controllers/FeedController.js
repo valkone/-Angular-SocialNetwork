@@ -100,4 +100,13 @@ app.controller('FeedController', function($scope, $http, baseServiceUrl, feedSer
             });
     };
 
+    $scope.showDesc = function(a) {
+        var div = 'userDesc' + a;
+        document.getElementById(div).style.display = 'block';
+    };
+
+    $scope.hideDesc = function(a) {
+        var div = 'userDesc' + a;
+        document.getElementById(div).style.display = 'none';
+    };
 });

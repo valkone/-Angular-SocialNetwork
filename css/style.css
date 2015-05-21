@@ -149,11 +149,30 @@ hr {
 }
 
 #avatar {
+    display: inline-block;
+    float: left;
     margin-right: 10px;
 }
 
 #avatar img {
     border-radius: 50%;
+}
+
+#avatar-username {
+    float: left;
+    margin-top: 15px;
+    padding-right: 17px;
+}
+
+#avatar-username a {
+    color: #fff;
+    font-size: 15px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+#avatar-username a:hover {
+    text-decoration: underline;
 }
 
 #menu {
@@ -245,6 +264,16 @@ hr {
     color: #fff;
     font-size: 20px;
     padding-bottom: 7px;
+}
+
+.feed-header-right a {
+    color: #fff;
+    font-size: 20px;
+    text-decoration: none;
+}
+
+.feed-header-right a:hover {
+    color: #ccc;
 }
 
 .feed-date {
@@ -626,3 +655,72 @@ hr {
 #save-changes-button {
     float: right;
 }
+
+#friendRequestPopup {
+    background-color: #fff;
+    width: 300px;
+    padding: 10px 0;
+    position: absolute;
+    border: 1px solid #ccc;
+}
+
+.friendRequestContent {
+    padding: 10px;
+}
+
+.requesterPic {
+    float: left;
+    width: 38px;
+    height: 38px;
+}
+
+.requesterName {
+    margin-top: -5px;
+    padding-left: 10px;
+    float: left;
+}
+
+.requesterName a {
+    font-size: 15px !important;
+    font-weight: bold;
+    color: #000 !important;
+}
+
+.requesterName a:hover {
+    color: #000 !important;
+    text-decoration: underline !important;
+}
+
+.options {
+    float: right;
+    margin-top: 10px;
+    height: 35px;
+}
+
+.options a {
+    font-size: 13px !important;
+    padding: 0 5px;
+}
+
+.options a:hover {
+    color: #676767 !important;
+    text-decoration: underline !important;
+}
+
+.friendRequestHover:hover {
+    background: #f7f7f7;
+}
+
+#mouseOver {
+    padding: 18px 0;
+}
+
+
+
+
+
+
+
+
+
+

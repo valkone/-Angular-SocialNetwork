@@ -68,7 +68,7 @@
             Friends - <a href="#">5</a> total
         </div>
         <div class="friend-review" ng-repeat="friend in friends.friends">
-            <img ng-src="{{comment.author.profileImageData || 'images/no-avatar.png'}}" />
+            <img ng-src="{{friend.profileImageData || 'images/no-avatar.png'}}" />
             {{friend.name}}
         </div>
     </div>

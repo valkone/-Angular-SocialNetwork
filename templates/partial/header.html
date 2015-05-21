@@ -1,16 +1,36 @@
-<div id="header" ng-controller="AuthenticationController">
+<div id="header" ng-controller="HeaderController">
     <div class="wrapper">
-            <span id="avatar">
-                <img src="images/avatar.jpg" />
-                <span><a href="#/home">{{username}}</a></span>
-            </span>
+            <div id="avatar">
+                <img src="{{userData.profilePicture}}" width="50" height="50"/>
+            </div>
+            <div id="avatar-username"><a href="#/home">{{userData.username}}</a></div>
         <div id="menu">
             <ul>
-                <li><a href="#">Notifications <span>(100)</span></a></li>
-                <li><a href="#">Friend Requests <span>(10)</span></a></li>
+                <li><a href="#/home">Feed</a></li>
+                <li>
+                    <a href="javascript: void(0);" id="mouseOver" ng-mouseover="show()" ng-mouseleave="hide()">
+                        Friend Requests <span>({{userData.pendingRequestsCount}})</span>
+                    </a>
+                    <div style="display: none;" id="friendRequestPopup" ng-mouseover="show()" ng-mouseleave="hide()">
+                        <div class="friendRequest" ng-repeat="request in userData.pendingRequests">
+                            <div class="friendRequestHover">
+                                <div class="friendRequestContent">
+                                    <div class="requesterPic"><a href="#/users/{{request.user.username}}"><img ng-src="{{request.user.profileImageData || 'images/no-avatar.png'}}" width="38" height="38" /></a></div>
+                                    <div class="requesterName"><a href="#/users/{{request.user.username}}">{{request.user.name}}</a></div>
+                                    <div class="options">
+                                        <a href="javascript: void(0);" ng-click="requestApprove(request.id)">Approve</a>
+                                        <a href="javascript: void(0);" ng-click="requestReject(request.id)">Reject</a>
+                                    </div>
+                                    <div class="clear"></div>
+                                </div>
+                            </div>
+                            <hr />
+                        </div>
+                    </div>
+                </li>
                 <li><a href="#/profile">Profile</a></li>
                 <li><a href="#/profile/password">Change password</a></li>
-                <li><a href="javascript: void(0);" ng-click="logout()">Logout</a></li>
+                <li><a href="javascript: void(0);" ng-controller="AuthenticationController" ng-click="logout()">Logout</a></li>
             </ul>
         </div>
         <div id="search">
