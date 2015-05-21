@@ -37,4 +37,8 @@ app.controller('AuthenticationController', function($scope, $location, $route, a
         authentication.ClearCredentials();
         $location.path('/');
     };
+
+    $scope.test = function() {
+        alert();
+    }
 });

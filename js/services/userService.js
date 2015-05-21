@@ -35,6 +35,16 @@ app.factory('userService', function ($http, baseServiceUrl) {
         });
     };
 
+    userData.profileData = function (profileName, headers, success) {
+        $http({
+            method: 'get',
+            url: baseServiceUrl + '/api/users/' + profileName,
+            headers: headers
+        }).success(function(data){
+            success(data);
+        });
+    };
+
 
     return userData;
 });

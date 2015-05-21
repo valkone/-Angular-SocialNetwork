@@ -1,0 +1,76 @@
+<header ng-include="'templates/partial/header.html'"></header>
+
+<div class="wrapper" ng-controller="FeedController">
+    <div id="cover">
+        <div id="cover-image"><img ng-src="{{profileData.coverImageData || 'images/no-cover.jpg'}}" width="780" height="150" /></div>
+        <div id="cover-avatar"><img ng-src="{{profileData.profileImageData || 'images/no-avatar.png'}}" width="80" height="80" /> {{profileData.name}}</div>
+    </div>
+    <div id="new-post">
+        <div id="new-post-header">What´s new</div>
+        <div id="new-post-form">
+            <form>
+                <textarea id="new-post-textarea"></textarea>
+                <input type="submit" class="post-button" />
+            </form>
+        </div>
+    </div>
+    <div id="news-feed">
+        <div class="feed" ng-repeat="feed in feeds">
+            <div class="feed-header">
+                <div class="feed-header-left">
+                    <div class="feed-pic">
+                        <img ng-src="{{comment.author.profileImageData || 'images/no-avatar.png'}}" height="48px" />
+                    </div>
+                </div>
+                <div class="feed-header-right">
+                    <div class="feed-name">{{feed.author.username}}</div>
+                    <div class="feed-date">{{feed.date}}</div>
+                </div>
+            </div>
+            <div class="feed-content">
+                <p>{{feed.postContent}}</p>
+                <div class="clear"></div>
+                <div class="view-all-comments">
+                    <a ng-if="feed.totalCommentsCount > 3" href="javascript: void(0);" ng-click="showAllComments(feed.id)">View all <span>{{feed.totalCommentsCount}} comments</span></a>
+                    <div class="post-options">
+                        <span class="likesCount">{{feed.likesCount}}</span>
+                        <a href="javascript: void(0);" ng-if="!feed.liked" ng-click="likePost(feed.id)">Like</a>
+                        <a href="javascript: void(0);" ng-if="feed.liked" ng-click="dislikePost(feed.id)">Dislike</a>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="comments">
+                    <div class="comment" ng-repeat="comment in feed.comments">
+                        <div class="comment-pic">
+                            <img ng-src="{{comment.author.profileImageData || 'images/no-avatar.png'}}" height="35px" />
+                        </div>
+                        <div class="comment-right">
+                            <div class="comment-header">
+                                <span class="comment-name"><a href="#">{{comment.author.name}}</a></span>
+                                <span class="comment-date">{{comment.date}}</span>
+                                <div class="comment-content">{{comment.commentContent}}</div>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+                <div class="post-reply">
+                    <form>
+                        <input type="text" class="reply-input" ng-model="comment" placeholder="Comment" />
+                        <input type="submit" value="Reply" ng-click="postComment(feed.id)" class="reply-button" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="friends">
+        <div id="friends-header">
+            Friends - <a href="#">5</a> total
+        </div>
+        <div class="friend-review" ng-repeat="friend in friends.friends">
+            <img ng-src="{{comment.author.profileImageData || 'images/no-avatar.png'}}" />
+            {{friend.name}}
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>

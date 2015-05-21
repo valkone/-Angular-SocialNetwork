@@ -22,6 +22,16 @@ app.factory('feedService', function ($http, baseServiceUrl) {
             });
     };
 
+    data.getProfileFriends = function(username, headers, success) {
+        $http({
+            method: 'get',
+            url: baseServiceUrl + '/api/users/' + username + '/friends/preview',
+            headers: headers
+        }).success(function(data){
+            success(data);
+        });
+    };
+
     data.publishComment = function (postId, data, headers, success, error) {
         $http.post(baseServiceUrl + '/api/posts/' + postId + '/comments', data, {headers: headers})
             .success(function (data, status, headers, config) {
@@ -54,6 +64,17 @@ app.factory('feedService', function ($http, baseServiceUrl) {
         $http({
             method: 'delete',
             url: baseServiceUrl + '/api/Posts/' + id + '/likes',
+            headers: headers
+
+        }).success(function(data){
+            success(data);
+        });
+    };
+
+    data.getProfileFeeds = function (user, headers, success) {
+        $http({
+            method: 'get',
+            url: baseServiceUrl + '/api/users/' + user + '/wall?StartPostId&PageSize=10',
             headers: headers
 
         }).success(function(data){

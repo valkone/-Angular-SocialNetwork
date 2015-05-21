@@ -27,6 +27,10 @@ app.config(function ($routeProvider) {
         templateUrl: 'templates/partial/change-password.html',
         controller: 'UserController'
     });
+    $routeProvider.when('/users/:username', {
+        templateUrl: 'templates/partial/user.html',
+        controller: 'UserController'
+    });
 
     // TODO: OTHERWISE
 });
