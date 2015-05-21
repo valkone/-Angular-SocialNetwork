@@ -31,6 +31,10 @@ app.config(function ($routeProvider) {
         templateUrl: 'templates/partial/user.html',
         controller: 'UserController'
     });
+    $routeProvider.when('/users/:username/friends', {
+        templateUrl: 'templates/partial/friends.html',
+        controller: 'UserController'
+    });
 
     // TODO: OTHERWISE
 });

@@ -45,6 +45,16 @@ app.factory('userService', function ($http, baseServiceUrl) {
         });
     };
 
+    userData.getFriendFriends = function(profileName, headers, success) {
+        $http({
+            method: 'get',
+            url: baseServiceUrl + '/api/users/' + profileName + '/friends',
+            headers: headers
+        }).success(function(data){
+            success(data);
+        });
+    };
+
 
     return userData;
 });

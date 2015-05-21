@@ -13,6 +13,14 @@ app.controller('UserController', function($scope, $http, baseServiceUrl, userSer
         $scope.profileData = data;
     });
 
+    if($route.current.loadedTemplateUrl == "templates/partial/friends.html") {
+        userService.getFriendFriends($route.current.params.username,
+            authentication.GetHeaders(),
+            function(data){
+                $scope.friendFriends = data;
+            });
+    }
+
     $scope.saveChanges = function() {
         userService.updateProfile(this.userData, authentication.GetHeaders(),
         function(data) {

@@ -1,0 +1,27 @@
+<header ng-include="'templates/partial/header.html'"></header>
+
+<div class="wrapper">
+    <div id="header-friends">
+        <div id="friends-search">
+            <form>
+                <input type="text" placeholder="Search..." id="friend-search" />
+            </form>
+        </div>
+        <div id="friends-static">
+            <b>100</b> total friends
+        </div>
+        <div class="clear"></div>
+    </div>
+    <hr />
+
+    <div id="friend-list">
+        <a href="#/users/{{friend.username}}" ng-repeat="friend in friendFriends">
+            <div class="friend">
+                <img ng-src="{{friend.profileImageData || 'images/no-avatar.png'}}" />
+                <div class="friend-name">{{friend.name}}</div>
+            </div>
+        </a>
+
+
+    </div>
+</div>
