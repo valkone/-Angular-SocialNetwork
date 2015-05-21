@@ -11,7 +11,7 @@
                     <a href="javascript: void(0);" id="mouseOver" ng-mouseover="show()" ng-mouseleave="hide()">
                         Friend Requests <span>({{userData.pendingRequestsCount}})</span>
                     </a>
-                    <div style="display: none;" id="friendRequestPopup" ng-mouseover="show()" ng-mouseleave="hide()">
+                    <div style="display: none;" ng-if="userData.pendingRequestsCount != 0" id="friendRequestPopup" ng-mouseover="show()" ng-mouseleave="hide()">
                         <div class="friendRequest" ng-repeat="request in userData.pendingRequests">
                             <div class="friendRequestHover">
                                 <div class="friendRequestContent">
@@ -35,9 +35,18 @@
         </div>
         <div id="search">
             <form>
-                <input type="text"  placeholder="Search..." class="search-input" />
-                <input type="submit"  value="Search" class="search-button" />
+                <input type="text" placeholder="Search..." ng-model="searchQuery" ng-change="searchFriends()" class="search-input" />
+                <input type="submit" value="Search" class="search-button" />
             </form>
+            <div id="searchResults" ng-show="searchQuery.length && foundedPeope.length">
+                <div class="result" ng-repeat="person in foundedPeope">
+                    <a href="#/users/{{person.username}}">
+                        <img ng-src="{{person.profileImageData || 'images/no-avatar.png'}}" width="38" height="38"/>
+                        {{person.name}}
+                    </a>
+                    <hr />
+                </div>
+            </div>
         </div>
     </div>
 </div>

@@ -715,12 +715,27 @@ hr {
     padding: 18px 0;
 }
 
+#searchResults {
+    position: absolute;
+    width: 285px;
+    background: #fff;
+    border: 1px solid #ccc;
+}
 
+.result a {
+    color: #000;
+    text-decoration: none;
+}
 
+.result a:hover {
+    text-decoration: underline;
+}
 
+.result {
+    padding-top: 8px !important;
+    line-height: 30px !important;
+}
 
-
-
-
-
-
+.result:hover {
+    background-color: #f7f7f7;
+}

@@ -13,11 +13,15 @@ app.controller('HeaderController', function($scope, authentication, headerServic
     );
 
     $scope.show = function() {
-        document.getElementById('friendRequestPopup').style.display = "block";
+        if(document.getElementById('friendRequestPopup')) {
+            document.getElementById('friendRequestPopup').style.display = "block";
+        }
     };
 
     $scope.hide = function() {
-        document.getElementById('friendRequestPopup').style.display = "none";
+        if(document.getElementById('friendRequestPopup')) {
+            document.getElementById('friendRequestPopup').style.display = "none";
+        }
     };
 
     $scope.requestApprove = function(id) {
@@ -47,4 +51,15 @@ app.controller('HeaderController', function($scope, authentication, headerServic
                 $scope.userData.pendingRequests = tempArray;
             })
     };
+
+    $scope.searchFriends = function() {
+        var query = $scope.searchQuery;
+        if(query != null && query != '') {
+            headerService.searchFriends(query,
+                authentication.GetHeaders(),
+                function(data) {
+                    $scope.foundedPeope = data;
+                })
+        }
+    }
 });

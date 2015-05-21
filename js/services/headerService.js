@@ -32,5 +32,15 @@ app.factory('headerService', function ($http, baseServiceUrl) {
         });
     };
 
+    userData.searchFriends = function(query, headers, success) {
+        $http({
+            method: 'get',
+            url: baseServiceUrl + '/api/users/search?searchTerm=' + query,
+            headers: headers
+        }).success(function(data){
+            success(data);
+        });
+    };
+
     return userData;
 });
