@@ -1,5 +1,6 @@
 app.controller('FeedController', function($scope, $http, baseServiceUrl, feedService, authentication, $route) {
     $scope.comment = '';
+    $scope.postContent = '';
 
     if($route.current.loadedTemplateUrl == "templates/partial/user.html") {
         feedService.getProfileFriends(
@@ -39,20 +40,26 @@ app.controller('FeedController', function($scope, $http, baseServiceUrl, feedSer
             },
             authentication.GetHeaders(),
             function(data) {
-                //if($route.current.loadedTemplateUrl == "templates/partial/user.html") {
-                //    for(var feed in _this.profileFeedData) {
-                //        if(_this.profileFeedData[feed].id == postId) {
-                //            _this.profileFeedData[feed].comments.push(data);
-                //        }
-                //    }
-                //} else {
-                    for(feed in _this.feeds) {
-                        if(_this.feeds[feed].id == postId) {
-                            _this.feeds[feed].comments.push(data);
-                        }
+                for(feed in _this.feeds) {
+                    if(_this.feeds[feed].id == postId) {
+                        _this.feeds[feed].comments.push(data);
                     }
-                //}
+                }
             })
+    };
+
+    $scope.addPost = function(user) {
+        var _this = this;
+        feedService.addPost(
+            {
+                postContent: $scope.postContent,
+                username: user
+            },
+            authentication.GetHeaders(),
+            function(data) {
+                _this.feeds.unshift(data);
+            }
+        )
     };
 
     $scope.showAllComments = function(id) {

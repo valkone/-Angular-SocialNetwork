@@ -9,8 +9,8 @@
         <div id="new-post-header">What´s new</div>
         <div id="new-post-form">
             <form>
-                <textarea id="new-post-textarea"></textarea>
-                <input type="submit" class="post-button" />
+                <textarea id="new-post-textarea" ng-model="postContent"></textarea>
+                <input type="submit" ng-click="addPost(profileData.username)" class="post-button" />
             </form>
         </div>
     </div>

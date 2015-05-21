@@ -82,5 +82,17 @@ app.factory('feedService', function ($http, baseServiceUrl) {
         });
     };
 
+    data.addPost = function(data, headers, success) {
+        $http({
+            method: 'post',
+            url: baseServiceUrl + '/api/posts',
+            headers: headers,
+            data: data
+
+        }).success(function(data){
+            success(data);
+        });
+    };
+
     return data;
 });
