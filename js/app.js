@@ -19,9 +19,14 @@ app.config(function ($routeProvider) {
         templateUrl: 'templates/partial/feed.html',
         controller: 'FeedController'
     });
-    $routeProvider.when('/settings/password', {
+    $routeProvider.when('/profile', {
+        templateUrl: 'templates/partial/profile.html',
+        controller: 'UserController'
+    });
+    $routeProvider.when('/profile/password', {
         templateUrl: 'templates/partial/change-password.html',
-        controller: 'HomeController'
+        controller: 'UserController'
     });
 
+    // TODO: OTHERWISE
 });

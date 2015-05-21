@@ -2,12 +2,14 @@
     <div class="wrapper">
             <span id="avatar">
                 <img src="images/avatar.jpg" />
+                <span><a href="#/home">{{username}}</a></span>
             </span>
         <div id="menu">
             <ul>
-                <li><a href="#">Messages <span>(100)</span></a></li>
+                <li><a href="#">Notifications <span>(100)</span></a></li>
                 <li><a href="#">Friend Requests <span>(10)</span></a></li>
-                <li><a href="#">Settings</a></li>
+                <li><a href="#/profile">Profile</a></li>
+                <li><a href="#/profile/password">Change password</a></li>
                 <li><a href="javascript: void(0);" ng-click="logout()">Logout</a></li>
             </ul>
         </div>

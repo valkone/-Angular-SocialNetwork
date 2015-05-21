@@ -22,11 +22,11 @@
             <span ng-show="form.email.$error.emailfield && form.email.$dirty">
                     Invalid email<br />
             </span>
-            <div id="gender" ng-model="registerData.gender" >
+            <div id="gender">
                 <p>Gender:</p>
-                <input type="radio" name="gender" /> Male
-                <input type="radio" name="gender" /> Female
-                <input type="radio" name="gender" /> Other
+                <input type="radio" ng-model="registerData.gender" value="1" name="gender" /> Male
+                <input type="radio" ng-model="registerData.gender" value="2" name="gender" /> Female
+                <input type="radio" ng-model="registerData.gender" value="0" name="gender" /> Other
             </div>
             <div class="clear"></div>
             <input type="submit" class="input-button" ng-disabled="!form.$valid" value="Register" />

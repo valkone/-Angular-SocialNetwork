@@ -29,3 +29,18 @@ app.directive('confirmpassword', function() {
         }
     };
 });
+
+app.directive('confirmnewpassword', function() {
+    return {
+        require: 'ngModel',
+        link: function(scope, elm, attrs, ctrl) {
+            ctrl.$validators.confirmnewpassword = function(modelValue, viewValue) {
+                if(viewValue == scope.userData.newPassword) {
+                    return true;
+                }
+
+                return false;
+            };
+        }
+    };
+});

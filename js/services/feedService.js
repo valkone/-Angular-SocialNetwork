@@ -40,13 +40,25 @@ app.factory('feedService', function ($http, baseServiceUrl) {
     };
 
     data.likePost = function (id, headers, success) {
-        $http.post(baseServiceUrl + '/api/Posts/' + id + '/likes',
-            {
-                headers: headers
-            })
-            .success(function (data, status, headers, config) {
-                success(data);
-            });
+        $http({
+            method: 'post',
+            url: baseServiceUrl + '/api/Posts/' + id + '/likes',
+            headers: headers
+
+        }).success(function(data){
+            success(data);
+        });
+    };
+
+    data.dislikePost = function (id, headers, success) {
+        $http({
+            method: 'delete',
+            url: baseServiceUrl + '/api/Posts/' + id + '/likes',
+            headers: headers
+
+        }).success(function(data){
+            success(data);
+        });
     };
 
     return data;

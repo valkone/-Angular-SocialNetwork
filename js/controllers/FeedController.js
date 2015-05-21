@@ -19,7 +19,7 @@ app.controller('FeedController', function($scope, $http, baseServiceUrl, feedSer
             },
             authentication.GetHeaders(),
             function(data) {
-                for(feed in _this.feeds) {
+                for(var feed in _this.feeds) {
                     if(_this.feeds[feed].id == postId) {
                         _this.feeds[feed].comments.push(data);
                     }
@@ -31,7 +31,7 @@ app.controller('FeedController', function($scope, $http, baseServiceUrl, feedSer
         var _this = this;
         feedService.getAllComments(id, authentication.GetHeaders(),
         function(data){
-            for(feed in _this.feeds) {
+            for(var feed in _this.feeds) {
                 if(_this.feeds[feed].id == id) {
                     _this.feeds[feed].comments = data;
                 }
@@ -40,10 +40,29 @@ app.controller('FeedController', function($scope, $http, baseServiceUrl, feedSer
     };
 
     $scope.likePost = function(id) {
+        var _this = this;
         feedService.likePost(id, authentication.GetHeaders(),
         function(data) {
-            console.log(data);
+            for(var feed in _this.feeds) {
+                if(_this.feeds[feed].id == id) {
+                    _this.feeds[feed].likesCount++;
+                    _this.feeds[feed].liked = true;
+                }
+            }
         });
+    };
+
+    $scope.dislikePost = function(id) {
+        var _this = this;
+        feedService.dislikePost(id, authentication.GetHeaders(),
+            function(data) {
+                for(var feed in _this.feeds) {
+                    if(_this.feeds[feed].id == id) {
+                        _this.feeds[feed].likesCount--;
+                        _this.feeds[feed].liked = false;
+                    }
+                }
+            });
     };
 
 });

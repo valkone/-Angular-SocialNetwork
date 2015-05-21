@@ -1,4 +1,6 @@
 app.controller('AuthenticationController', function($scope, $location, $route, authentication) {
+    $scope.username = localStorage['username'];
+
     var ClearData = function () {
         $scope.loginData = "";
         $scope.registerData = "";
