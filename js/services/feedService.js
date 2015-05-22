@@ -106,6 +106,16 @@ app.factory('feedService', function ($http, baseServiceUrl) {
         });
     };
 
+    data.deletePost = function(id, headers, success) {
+        $http({
+            method: 'delete',
+            url: baseServiceUrl + '/api/Posts/' + id,
+            headers: headers
+        }).success(function(data){
+            success(data);
+        });
+    };
+
 
     return data;
 });

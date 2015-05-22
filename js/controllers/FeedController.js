@@ -148,5 +148,23 @@ app.controller('FeedController', function($scope, $sce, $http, baseServiceUrl, f
                 }
             }
         })
-    }
+    };
+
+    $scope.deletePost = function(id) {
+        var _this = this;
+        feedService.deletePost(id,
+        authentication.GetHeaders(),
+        function(data){
+            for(var feed in _this.feeds) {
+                if(_this.feeds[feed].id == id) {
+                    delete _this.feeds[feed].postContent;
+
+
+                    var parent = document.getElementById("news-feed");
+                    var child = document.getElementById("feed" + id);
+                    parent.removeChild(child);
+                }
+            }
+        })
+    };
 });

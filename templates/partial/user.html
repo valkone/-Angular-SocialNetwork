@@ -19,7 +19,7 @@
         </div>
     </div>
     <div id="news-feed">
-        <div class="feed" ng-repeat="feed in feeds">
+        <div class="feed" ng-repeat="feed in feeds" id="feed{{feed.id}}">
             <div class="feed-header">
                 <div class="feed-header-left">
                     <div class="feed-pic">
@@ -42,6 +42,7 @@
                     <a ng-if="feed.totalCommentsCount > 3" href="javascript: void(0);" ng-click="showAllComments(feed.id)">View all <span>{{feed.totalCommentsCount}} comments</span></a>
                     <div class="post-options">
                         <span ng-if="feed.author.username == feedOwner"><a href="javascript: void(0);" ng-click="showEditField(feed.id)">Edit</a></span>
+                        <span><a href="javascript: void(0);" ng-if="feed.author.username == feedOwner" ng-click="deletePost(feed.id)">Delete</a></span>
                         <span class="likesCount">{{feed.likesCount}}</span>
                         <a href="javascript: void(0);" ng-if="!feed.liked" ng-click="likePost(feed.id)">Like</a>
                         <a href="javascript: void(0);" ng-if="feed.liked" ng-click="dislikePost(feed.id)">Dislike</a>
