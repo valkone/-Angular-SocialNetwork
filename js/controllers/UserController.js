@@ -14,11 +14,18 @@ app.controller('UserController', function($scope, $http, baseServiceUrl, userSer
     });
 
     if($route.current.loadedTemplateUrl == "templates/partial/friends.html") {
-        userService.getFriendFriends($route.current.params.username,
-            authentication.GetHeaders(),
+        if($route.current.params.username != localStorage['username']) {
+            userService.getFriendFriends($route.current.params.username,
+                authentication.GetHeaders(),
+                function(data){
+                    $scope.friendFriends = data;
+                });
+        } else {
+            userService.getMyFriends(authentication.GetHeaders(),
             function(data){
                 $scope.friendFriends = data;
-            });
+            })
+        }
     }
 
     $scope.saveChanges = function() {

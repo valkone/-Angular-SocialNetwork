@@ -95,5 +95,17 @@ app.factory('feedService', function ($http, baseServiceUrl) {
         });
     };
 
+    data.editPost = function(id, data, headers, success) {
+        $http({
+            method: 'put',
+            url: baseServiceUrl + '/api/Posts/' + id,
+            headers: headers,
+            data: data
+        }).success(function(data){
+            success(data);
+        });
+    };
+
+
     return data;
 });

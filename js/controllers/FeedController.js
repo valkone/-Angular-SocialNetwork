@@ -1,14 +1,18 @@
-app.controller('FeedController', function($scope, $http, baseServiceUrl, feedService, authentication, $route) {
+app.controller('FeedController', function($scope, $sce, $http, baseServiceUrl, feedService, authentication, $route) {
     $scope.comment = '';
     $scope.postContent = '';
+    $scope.feedOwner = localStorage['username'];
+
 
     if($route.current.loadedTemplateUrl == "templates/partial/user.html") {
-        feedService.getProfileFriends(
-            $route.current.params.username,
-            authentication.GetHeaders(),
-            function (data) {
-                $scope.friends = data;
-            });
+        if($route.current.params.username != localStorage['username']){
+            feedService.getProfileFriends(
+                $route.current.params.username,
+                authentication.GetHeaders(),
+                function (data) {
+                    $scope.friends = data;
+                });
+        }
     } else {
         feedService.getFriends(authentication.GetHeaders(),
             function (data) {
@@ -109,4 +113,40 @@ app.controller('FeedController', function($scope, $http, baseServiceUrl, feedSer
         var div = 'userDesc' + a;
         document.getElementById(div).style.display = 'none';
     };
+
+    $scope.showEditField = function(id) {
+        var postId = 'post' + id,
+            textareaId = 'editPost' + id,
+            postNote = document.getElementById(postId),
+            textareaNote = document.getElementById(textareaId);
+
+        if(postNote.style.display == 'block') {
+            postNote.style.display = 'none';
+            textareaNote.style.display = 'block';
+        } else {
+            postNote.style.display = 'block';
+            textareaNote.style.display = 'none';
+        }
+    };
+
+    $scope.editPost = function(id) {
+        var editedPost = document.getElementById('textarea' + id).value,
+            _this = this,
+            postId = 'post' + id,
+            textareaId = 'editPost' + id;
+
+        feedService.editPost(id, {
+            'postContent': editedPost
+        },
+        authentication.GetHeaders(),
+        function(data){
+            for(var feed in _this.feeds) {
+                if(_this.feeds[feed].id == id) {
+                    _this.feeds[feed].postContent = data.content;
+                    document.getElementById(postId).style.display = 'block';
+                    document.getElementById(textareaId).style.display = 'none';
+                }
+            }
+        })
+    }
 });

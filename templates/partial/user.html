@@ -69,11 +69,13 @@
     </div>
     <div id="friends">
         <div id="friends-header">
-            Friends - <a href="#">5</a> total
+            Friends - <a href="#">{{friends.totalCount}}</a> total
         </div>
         <div class="friend-review" ng-repeat="friend in friends.friends">
-            <img ng-src="{{friend.profileImageData || 'images/no-avatar.png'}}" />
-            {{friend.name}}
+            <a href="#/users/{{friend.username}}">
+                <img ng-src="{{friend.profileImageData || 'images/no-avatar.png'}}" />
+                {{friend.name}}
+            </a>
         </div>
     </div>
     <div class="clear"></div>

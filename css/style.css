@@ -749,3 +749,7 @@ hr {
     font-weight: normal;
     text-decoration: none;
 }
+
+.editPost {
+    margin-top: 5px;
+}

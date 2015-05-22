@@ -16,11 +16,16 @@
                 </div>
             </div>
             <div class="feed-content">
-                <p>{{feed.postContent}}</p>
+                <p id="post{{feed.id}}">{{feed.postContent}}</p>
+                <div style="display: none;" class="editPost" id="editPost{{feed.id}}">
+                    <textarea id="textarea{{feed.id}}">{{feed.postContent}}</textarea>
+                    <button class="reply-button" ng-click="editPost(feed.id)">Edit</button>
+                </div>
                 <div class="clear"></div>
                 <div class="view-all-comments">
                     <a ng-if="feed.totalCommentsCount > 3" href="javascript: void(0);" ng-click="showAllComments(feed.id)">View all <span>{{feed.totalCommentsCount}} comments</span></a>
                         <div class="post-options">
+                            <span ng-if="feed.author.username == feedOwner"><a href="javascript: void(0);" ng-click="showEditField(feed.id)">Edit</a></span>
                             <span class="likesCount">{{feed.likesCount}}</span>
                             <a href="javascript: void(0);" ng-if="!feed.liked" ng-click="likePost(feed.id)">Like</a>
                             <a href="javascript: void(0);" ng-if="feed.liked" ng-click="dislikePost(feed.id)">Dislike</a>
@@ -53,7 +58,7 @@
     </div>
     <div id="friends">
         <div id="friends-header">
-            Friends - <a href="#">5</a> total
+            Friends - <a href="#/users/{{feedOwner}}/friends">{{friends.totalCount}}</a> total
         </div>
         <div id="friends-list-small">
             <div class="friend-review" ng-repeat="friend in friends.friends">

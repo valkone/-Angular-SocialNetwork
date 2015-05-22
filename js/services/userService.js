@@ -45,6 +45,16 @@ app.factory('userService', function ($http, baseServiceUrl) {
         });
     };
 
+    userData.getMyFriends = function(headers, success) {
+        $http({
+            method: 'get',
+            url: baseServiceUrl + '/api/me/friends',
+            headers: headers
+        }).success(function(data){
+            success(data);
+        });
+    };
+
     userData.getFriendFriends = function(profileName, headers, success) {
         $http({
             method: 'get',
