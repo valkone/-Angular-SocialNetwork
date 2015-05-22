@@ -3,7 +3,11 @@
 <div class="wrapper" ng-controller="FeedController">
     <div id="cover">
         <div id="cover-image"><img ng-src="{{profileData.coverImageData || 'images/no-cover.jpg'}}" width="780" height="150" /></div>
-        <div id="cover-avatar"><img ng-src="{{profileData.profileImageData || 'images/no-avatar.png'}}" width="80" height="80" /> {{profileData.name}}</div>
+        <div id="cover-avatar">
+            <img ng-src="{{profileData.profileImageData || 'images/no-avatar.png'}}" width="80" height="80" /> {{profileData.name}}
+            <span ng-if="!profileData.isFriend"><a href="javascript: void(0);" ng-click="addToFriendList(profileData.username)">Add to friend list</a></span>
+            <span ng-if="profileData.isFriend">Friends</span>
+        </div>
     </div>
     <div id="new-post">
         <div id="new-post-header">What´s new</div>

@@ -739,3 +739,13 @@ hr {
 .result:hover {
     background-color: #f7f7f7;
 }
+
+#status {
+    float: right;
+}
+
+#cover-avatar span a {
+    font-size: 14px;
+    font-weight: normal;
+    text-decoration: none;
+}

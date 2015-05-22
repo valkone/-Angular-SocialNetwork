@@ -55,6 +55,16 @@ app.factory('userService', function ($http, baseServiceUrl) {
         });
     };
 
+    userData.addToFriendList = function(username, headers, success) {
+        $http({
+            method: 'post',
+            url: baseServiceUrl + '/api/me/requests/' + username,
+            headers: headers
+        }).success(function(data){
+            success(data);
+        });
+    };
+
 
     return userData;
 });

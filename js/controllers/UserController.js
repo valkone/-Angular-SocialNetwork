@@ -41,4 +41,12 @@ app.controller('UserController', function($scope, $http, baseServiceUrl, userSer
             }
         )
     }
+
+    $scope.addToFriendList = function(username) {
+        userService.addToFriendList(username,
+        authentication.GetHeaders(),
+        function(data) {
+            console.log(data);
+        });
+    }
 });

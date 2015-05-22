@@ -3,13 +3,14 @@ app.factory('feedService', function ($http, baseServiceUrl) {
     var data = {};
 
     data.getNewsFeed = function (headers, success) {
-        $http.get(baseServiceUrl + '/api/me/feed?StartPostId=&PageSize=5',
-            {
-                headers: headers
-            })
-            .success(function (data, status, headers, config) {
-                success(data);
-            });
+        $http({
+            method: 'get',
+            url: baseServiceUrl + '/api/me/feed?StartPostId=&PageSize=5',
+            headers: headers
+
+        }).success(function(data){
+            success(data);
+        });
     };
 
     data.getFriends = function (headers, success) {
