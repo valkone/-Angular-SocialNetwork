@@ -1,0 +1,49 @@
+//OLD USERS FEEDS BACKUP:
+
+<div class="feed" ng-repeat="feed in feeds">
+    <div class="feed-header">
+        <div class="feed-header-left">
+            <div class="feed-pic">
+                <img ng-src="{{comment.author.profileImageData || 'images/no-avatar.png'}}" height="48px" />
+            </div>
+        </div>
+        <div class="feed-header-right">
+            <div class="feed-name">{{feed.author.username}}</div>
+            <div class="feed-date">{{feed.date}}</div>
+        </div>
+    </div>
+    <div class="feed-content">
+        <p>{{feed.postContent}}</p>
+        <div class="clear"></div>
+        <div class="view-all-comments">
+            <a ng-if="feed.totalCommentsCount > 3" href="javascript: void(0);" ng-click="showAllComments(feed.id)">View all <span>{{feed.totalCommentsCount}} comments</span></a>
+            <div class="post-options">
+                <span class="likesCount">{{feed.likesCount}}</span>
+                <a href="javascript: void(0);" ng-if="!feed.liked" ng-click="likePost(feed.id)">Like</a>
+                <a href="javascript: void(0);" ng-if="feed.liked" ng-click="dislikePost(feed.id)">Dislike</a>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="comments">
+            <div class="comment" ng-repeat="comment in feed.comments">
+                <div class="comment-pic">
+                    <img ng-src="{{comment.author.profileImageData || 'images/no-avatar.png'}}" height="35px" />
+                </div>
+                <div class="comment-right">
+                    <div class="comment-header">
+                        <span class="comment-name"><a href="#">{{comment.author.name}}</a></span>
+                        <span class="comment-date">{{comment.date}}</span>
+                        <div class="comment-content">{{comment.commentContent}}</div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+        <div class="post-reply">
+            <form>
+                <input type="text" class="reply-input" ng-model="comment" placeholder="Comment" />
+                <input type="submit" value="Reply" ng-click="postComment(feed.id)" class="reply-button" />
+            </form>
+        </div>
+    </div>
+</div>

@@ -23,20 +23,25 @@
             <div class="feed-header">
                 <div class="feed-header-left">
                     <div class="feed-pic">
-                        <img ng-src="{{comment.author.profileImageData || 'images/no-avatar.png'}}" height="48px" />
+                        <a href="#/users/{{feed.author.username}}"><img ng-src="{{comment.author.profileImageData || 'images/no-avatar.png'}}" height="48px" /></a>
                     </div>
                 </div>
                 <div class="feed-header-right">
-                    <div class="feed-name">{{feed.author.username}}</div>
+                    <div class="feed-name"><a href="#/users/{{feed.author.username}}">{{feed.author.name}}</a></div>
                     <div class="feed-date">{{feed.date}}</div>
                 </div>
             </div>
             <div class="feed-content">
-                <p>{{feed.postContent}}</p>
+                <p id="post{{feed.id}}">{{feed.postContent}}</p>
+                <div style="display: none;" class="editPost" id="editPost{{feed.id}}">
+                    <textarea id="textarea{{feed.id}}">{{feed.postContent}}</textarea>
+                    <button class="reply-button" ng-click="editPost(feed.id)">Edit</button>
+                </div>
                 <div class="clear"></div>
                 <div class="view-all-comments">
                     <a ng-if="feed.totalCommentsCount > 3" href="javascript: void(0);" ng-click="showAllComments(feed.id)">View all <span>{{feed.totalCommentsCount}} comments</span></a>
                     <div class="post-options">
+                        <span ng-if="feed.author.username == feedOwner"><a href="javascript: void(0);" ng-click="showEditField(feed.id)">Edit</a></span>
                         <span class="likesCount">{{feed.likesCount}}</span>
                         <a href="javascript: void(0);" ng-if="!feed.liked" ng-click="likePost(feed.id)">Like</a>
                         <a href="javascript: void(0);" ng-if="feed.liked" ng-click="dislikePost(feed.id)">Dislike</a>
@@ -46,11 +51,11 @@
                 <div class="comments">
                     <div class="comment" ng-repeat="comment in feed.comments">
                         <div class="comment-pic">
-                            <img ng-src="{{comment.author.profileImageData || 'images/no-avatar.png'}}" height="35px" />
+                            <a href="#/users/{{comment.author.username}}"><img ng-src="{{comment.author.profileImageData || 'images/no-avatar.png'}}" height="35px" /></a>
                         </div>
                         <div class="comment-right">
                             <div class="comment-header">
-                                <span class="comment-name"><a href="#">{{comment.author.name}}</a></span>
+                                <span class="comment-name"><a href="#/users/{{comment.author.username}}">{{comment.author.name}}</a></span>
                                 <span class="comment-date">{{comment.date}}</span>
                                 <div class="comment-content">{{comment.commentContent}}</div>
                             </div>
