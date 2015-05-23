@@ -56,7 +56,7 @@ app.controller('FeedController', function($scope, $sce, $http, baseServiceUrl, f
         var _this = this;
         feedService.addPost(
             {
-                postContent: $scope.postContent,
+                postContent: this.postContent,
                 username: user
             },
             authentication.GetHeaders(),
@@ -120,7 +120,7 @@ app.controller('FeedController', function($scope, $sce, $http, baseServiceUrl, f
             postNote = document.getElementById(postId),
             textareaNote = document.getElementById(textareaId);
 
-        if(postNote.style.display == 'block') {
+        if(postNote.style.getPropertyValue('display') == 'block') {
             postNote.style.display = 'none';
             textareaNote.style.display = 'block';
         } else {
@@ -167,4 +167,39 @@ app.controller('FeedController', function($scope, $sce, $http, baseServiceUrl, f
             }
         })
     };
+
+    $scope.toggleEditComment = function(id) {
+        var commentContentNote = document.getElementById('commentContent' + id),
+            editCommentNote = document.getElementById('editComment' + id);
+
+        if(commentContentNote.style.getPropertyValue('display') == 'block') {
+            commentContentNote.style.display = 'none';
+            editCommentNote.style.display = 'block';
+        } else {
+            commentContentNote.style.display = 'block';
+            editCommentNote.style.display = 'none';
+        }
+    };
+
+    $scope.editComment = function(commentId, feedId) {
+        var editedComment = document.getElementById('editedComment' + commentId).value;
+        var _this = this;
+        feedService.editComment(commentId, feedId,
+            {
+                commentContent: editedComment
+            },
+            authentication.GetHeaders(),
+            function(data) {
+                for(var feed in _this.feeds) {
+                    if(_this.feeds[feed].id == feedId) {
+                        for(var comment in _this.feeds[feed].comments) {
+                            _this.feeds[feed].comments[comment].commentContent = data.commentContent;
+                            document.getElementById('commentContent' + commentId).style.display = 'block';
+                            document.getElementById('editComment' + commentId).style.display = 'none';
+                        }
+                    }
+                }
+            }
+        )
+    }
 });

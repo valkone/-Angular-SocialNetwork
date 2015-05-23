@@ -75,6 +75,5 @@ app.factory('userService', function ($http, baseServiceUrl) {
         });
     };
 
-
     return userData;
 });

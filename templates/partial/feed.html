@@ -16,17 +16,17 @@
                 </div>
             </div>
             <div class="feed-content">
-                <p id="post{{feed.id}}">{{feed.postContent}}</p>
+                <p  style="display: block;" id="post{{feed.id}}">{{feed.postContent}}</p>
                 <div style="display: none;" class="editPost" id="editPost{{feed.id}}">
-                    <textarea id="textarea{{feed.id}}">{{feed.postContent}}</textarea>
+                    <textarea  class="reply-input" id="textarea{{feed.id}}">{{feed.postContent}}</textarea>
                     <button class="reply-button" ng-click="editPost(feed.id)">Edit</button>
                 </div>
                 <div class="clear"></div>
                 <div class="view-all-comments">
                     <a ng-if="feed.totalCommentsCount > 3" href="javascript: void(0);" ng-click="showAllComments(feed.id)">View all <span>{{feed.totalCommentsCount}} comments</span></a>
                         <div class="post-options">
-                            <span ng-if="feed.author.username == feedOwner"><a href="javascript: void(0);" ng-click="showEditField(feed.id)">Edit</a></span>
-                            <span><a href="javascript: void(0);" ng-click="deletePost(feed.id)">Delete</a></span>
+                            <span ng-if="feed.author.username == feedOwner"><a href="javascript: void(0);" ng-click="showEditField(feed.id)">Edit •</a></span>
+                            <span><a href="javascript: void(0);" ng-click="deletePost(feed.id)">Delete •</a></span>
                             <span class="likesCount">{{feed.likesCount}}</span>
                             <a href="javascript: void(0);" ng-if="!feed.liked" ng-click="likePost(feed.id)">Like</a>
                             <a href="javascript: void(0);" ng-if="feed.liked" ng-click="dislikePost(feed.id)">Dislike</a>
@@ -42,9 +42,15 @@
                             <div class="comment-header">
                                 <span class="comment-name"><a href="#/users/{{comment.author.username}}">{{comment.author.name}}</a></span>
                                 <span class="comment-date">{{comment.date}}</span>
-                                <div class="comment-content">{{comment.commentContent}}</div>
+                                <div class="comment-content" style="display: block;" id="commentContent{{comment.id}}">{{comment.commentContent}}</div>
+                                <div style="display: none;" id="editComment{{comment.id}}" class="edit-comment">
+                                    <textarea class="reply-input" id="editedComment{{comment.id}}">{{comment.commentContent}}</textarea>
+                                    <button class="reply-button edit-button" ng-click="editComment(comment.id, feed.id)">Edit</button>
+                                </div>
                             </div>
                         </div>
+                        <span class="editComment" ng-if="feedOwner == comment.author.username">
+                            <a href="javascript: void(0);" ng-click="toggleEditComment(comment.id)">Edit</a></span>
                         <div class="clear"></div>
                     </div>
                 </div>
@@ -59,13 +65,13 @@
     </div>
     <div id="friends">
         <div id="friends-header">
-            Friends - <a href="#/users/{{feedOwner}}/friends">{{friends.totalCount}}</a> total
+            Friends <span><a href="#/users/{{feedOwner}}/friends">{{friends.totalCount}}</a></span>
         </div>
         <div id="friends-list-small">
             <div class="friend-review" ng-repeat="friend in friends.friends">
                 <a href="#/users/{{friend.username}}">
                     <img ng-src="{{friend.profileImageData || 'images/no-avatar.png'}}" />
-                    {{friend.name}}
+                    <span>{{friend.name}}</span>
                 </a>
             </div>
         </div>

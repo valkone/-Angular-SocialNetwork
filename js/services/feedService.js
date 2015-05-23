@@ -89,7 +89,6 @@ app.factory('feedService', function ($http, baseServiceUrl) {
             url: baseServiceUrl + '/api/posts',
             headers: headers,
             data: data
-
         }).success(function(data){
             success(data);
         });
@@ -114,6 +113,17 @@ app.factory('feedService', function ($http, baseServiceUrl) {
         }).success(function(data){
             success(data);
         });
+    };
+
+    data.editComment = function(commentId, feedId, data, headers, success) {
+        $http({
+            method: 'put',
+            url: baseServiceUrl + '/api/posts/' + feedId + '/comments/' + commentId,
+            headers: headers,
+            data: data
+        }).success(function(data){
+            success(data);
+        })
     };
 
 

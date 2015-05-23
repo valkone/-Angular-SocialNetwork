@@ -1,6 +1,9 @@
 app.controller('UserController', function($scope, $http, baseServiceUrl, userService, authentication, $route) {
     $scope.userData = '';
     $scope.profileData = '';
+    $scope.profileOwner = $route.current.params.username;
+    $scope.me = localStorage['username'];
+
 
     userService.getDataAboutMe(authentication.GetHeaders(),
     function(data) {
@@ -11,7 +14,11 @@ app.controller('UserController', function($scope, $http, baseServiceUrl, userSer
     authentication.GetHeaders(),
     function(data){
         $scope.profileData = data;
+        if(!data.isFriend && data.username != localStorage['username']) {
+            $scope.wrapperStyle = "test";
+        }
     });
+
 
     if($route.current.loadedTemplateUrl == "templates/partial/friends.html") {
         if($route.current.params.username != localStorage['username']) {
@@ -47,7 +54,7 @@ app.controller('UserController', function($scope, $http, baseServiceUrl, userSer
                 console.log(data);
             }
         )
-    }
+    };
 
     $scope.addToFriendList = function(username) {
         userService.addToFriendList(username,
@@ -55,5 +62,5 @@ app.controller('UserController', function($scope, $http, baseServiceUrl, userSer
         function(data) {
             console.log(data);
         });
-    }
+    };
 });

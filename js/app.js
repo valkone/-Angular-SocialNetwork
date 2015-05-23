@@ -35,6 +35,5 @@ app.config(function ($routeProvider) {
         templateUrl: 'templates/partial/friends.html',
         controller: 'UserController'
     });
-
-    // TODO: OTHERWISE
+    $routeProvider.otherwise({redirectTo: '/'})
 });

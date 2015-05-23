@@ -144,7 +144,7 @@ hr {
 }
 
 .wrapper {
-    width: 1100px;
+    width: 950px;
     margin: 0 auto;
 }
 
@@ -239,12 +239,11 @@ hr {
 
 #news-feed {
     float: left;
-    width: 800px;
+    width: 600px;
 }
 
 .feed {
-    width: 380px;
-    float: left;
+    width: 625px;
     margin-right: 20px;
     margin-bottom: 20px;
     background-color: #fff;
@@ -273,7 +272,7 @@ hr {
 }
 
 .feed-header-right a:hover {
-    color: #ccc;
+    opacity: 0.9;
 }
 
 .feed-date {
@@ -292,6 +291,7 @@ hr {
     color: #555;
     float: left;
     padding: 7px 12px;
+    width: 100%;
 }
 
 .view-all-comments {
@@ -416,15 +416,22 @@ hr {
     font-size: 18px;
     color: #fff;
     padding: 14px;
+    text-transform: uppercase;
 }
 
 #friends-header a {
-    text-decoration: underline;
-    color: #fff;
+    text-decoration: none;
+    color: #b5d2cf;
+    font-weight: bold;
+    font-size: 16px;
 }
 
 #friends-header a:hover {
-    text-decoration: none;
+    color: #fff;
+}
+
+#friends-header span {
+    float: right;
 }
 
 #friends-list-small {
@@ -436,6 +443,19 @@ hr {
     display: inline-block;
     width: 83px;
     height: 83px;
+    padding: 4px;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.friend-review a  {
+    text-decoration: none;
+    font-weight: bold;
+    color: #ccc;
+}
+
+.friend-review a:hover {
+    color:  #25ad9f;
 }
 
 .friend-review img {
@@ -549,15 +569,40 @@ hr {
 }
 
 #cover-avatar {
-    width: 500px;
+    width: 600px;
     position: relative;
     top: 50px;
     color: #fff;
-    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
     font-size: 25px;
     font-weight: bold;
     vertical-align: middle;
-    left: 50px;
+    left: 12px;
+}
+
+#cover-avatar span {
+    position: relative;
+    top: -1px;
+    text-shadow: 0 0 2px rgba(255, 255, 255, .9), 0 0 2px rgba(255, 255, 255, .9), 0 0 2px rgba(255, 255, 255, .9);
+    color: #111;
+    left: 10px;
+}
+
+#cover-avatar span a {
+    background-color: #333;
+    outline: 2px solid rgba(0, 0, 0, 0.2);
+    font-weight: bold !important;
+    text-shadow: none !important;
+    color: #fff;
+    float: right;
+    display: inline-block;
+    vertical-align: bottom;
+    margin-top: 50px;
+    padding: 10px 15px;
+    text-transform: uppercase;
+}
+
+#cover-avatar span a:hover {
+    background-color: #444;
 }
 
 #cover-avatar img {
@@ -662,6 +707,7 @@ hr {
     padding: 10px 0;
     position: absolute;
     border: 1px solid #ccc;
+    z-index: 9999;
 }
 
 .friendRequestContent {
@@ -717,23 +763,31 @@ hr {
 
 #searchResults {
     position: absolute;
-    width: 285px;
+    width: 287px;
     background: #fff;
-    border: 1px solid #ccc;
+    outline: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .result a {
-    color: #000;
+    color: #999;
+    font-weight: bold;
     text-decoration: none;
 }
 
 .result a:hover {
-    text-decoration: underline;
+    color: #119d8a;
 }
 
 .result {
+    padding-left: 10px;
     padding-top: 8px !important;
     line-height: 30px !important;
+    border-bottom: 1px solid #eee;
+}
+
+.result a span{
+    vertical-align: 10px;
+    padding-left: 10px;
 }
 
 .result:hover {
@@ -751,5 +805,46 @@ hr {
 }
 
 .editPost {
-    margin-top: 5px;
+    padding: 10px;
+}
+
+.editPost textarea {
+    resize: none;
+}
+
+.editPost button {
+    position: relative;
+    top: -11px;
+}
+
+#test {
+    margin: 0 auto;
+    width: 630px;
+}
+
+#friendsLabel{
+    cursor: default;
+}
+
+#friendsLabel:hover {
+    background: #333 !important;
+}
+
+.editComment {
+    float: right;
+    padding: 5px;
+}
+
+.editComment a {
+    text-decoration:  none;
+    color: #999;
+}
+
+.editComment a:hover {
+    color: #428bca;
+}
+
+.edit-button {
+    position: relative;
+    top: -12px;
 }

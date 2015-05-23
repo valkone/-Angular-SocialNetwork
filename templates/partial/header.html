@@ -41,10 +41,9 @@
             <div id="searchResults" ng-show="searchQuery.length && foundedPeope.length">
                 <div class="result" ng-repeat="person in foundedPeope">
                     <a href="#/users/{{person.username}}">
-                        <img ng-src="{{person.profileImageData || 'images/no-avatar.png'}}" width="38" height="38"/>
-                        {{person.name}}
+                        <img ng-src="{{person.profileImageData || 'images/no-avatar.png'}}" width="30" height="30"/>
+                        <span>{{person.name}}</span>
                     </a>
-                    <hr />
                 </div>
             </div>
         </div>

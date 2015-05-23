@@ -1,20 +1,20 @@
 <header ng-include="'templates/partial/header.html'"></header>
 
-<div class="wrapper" ng-controller="FeedController">
+<div class="wrapper" ng-controller="FeedController" id="{{wrapperStyle}}">
     <div id="cover">
-        <div id="cover-image"><img ng-src="{{profileData.coverImageData || 'images/no-cover.jpg'}}" width="780" height="150" /></div>
+        <div id="cover-image"><img ng-src="{{profileData.coverImageData || 'images/no-cover.jpg'}}" width="625" height="150" /></div>
         <div id="cover-avatar">
-            <img ng-src="{{profileData.profileImageData || 'images/no-avatar.png'}}" width="80" height="80" /> {{profileData.name}}
-            <span ng-if="!profileData.isFriend"><a href="javascript: void(0);" ng-click="addToFriendList(profileData.username)">Add to friend list</a></span>
-            <span ng-if="profileData.isFriend">Friends</span>
+            <img ng-src="{{profileData.profileImageData || 'images/no-avatar.png'}}" width="80" height="80" /> <span>{{profileData.name}}</span>
+            <span ng-if="!profileData.isFriend && profileOwner != me"><a href="javascript: void(0);" ng-click="addToFriendList(profileData.username)">Add to friend list</a></span>
+            <span ng-if="profileData.isFriend"><a href="javascript: void(0);" id="friendsLabel">Friends</a></span>
         </div>
     </div>
-    <div id="new-post">
+    <div id="new-post" ng-if="profileData.isFriend || profileOwner == me">
         <div id="new-post-header">What´s new</div>
         <div id="new-post-form">
             <form>
                 <textarea id="new-post-textarea" ng-model="postContent"></textarea>
-                <input type="submit" ng-click="addPost(profileData.username)" class="post-button" />
+                <input type="submit" ng-click="addPost(profileData.username)" value="Post" class="post-button" />
             </form>
         </div>
     </div>
@@ -44,13 +44,15 @@
                         <span ng-if="feed.author.username == feedOwner"><a href="javascript: void(0);" ng-click="showEditField(feed.id)">Edit</a></span>
                         <span><a href="javascript: void(0);" ng-if="feed.author.username == feedOwner" ng-click="deletePost(feed.id)">Delete</a></span>
                         <span class="likesCount">{{feed.likesCount}}</span>
-                        <a href="javascript: void(0);" ng-if="!feed.liked" ng-click="likePost(feed.id)">Like</a>
+                        <a href="javascript: void(0);" ng-if="!feed.liked && (profileData.isFriend || profileOwner == me)" ng-click="likePost(feed.id)">Like</a>
+                        <span ng-if="!profileData.isFriend && profileOwner != me">Likes</span>
                         <a href="javascript: void(0);" ng-if="feed.liked" ng-click="dislikePost(feed.id)">Dislike</a>
                     </div>
                     <div class="clear"></div>
                 </div>
                 <div class="comments">
                     <div class="comment" ng-repeat="comment in feed.comments">
+                        <span ng-if="feedOwner == comment.author.username">Edit</span>
                         <div class="comment-pic">
                             <a href="#/users/{{comment.author.username}}"><img ng-src="{{comment.author.profileImageData || 'images/no-avatar.png'}}" height="35px" /></a>
                         </div>
@@ -64,7 +66,7 @@
                         <div class="clear"></div>
                     </div>
                 </div>
-                <div class="post-reply">
+                <div class="post-reply" ng-if="profileData.isFriend || profileOwner == me">
                     <form>
                         <input type="text" class="reply-input" ng-model="comment" placeholder="Comment" />
                         <input type="submit" value="Reply" ng-click="postComment(feed.id)" class="reply-button" />
@@ -73,9 +75,9 @@
             </div>
         </div>
     </div>
-    <div id="friends">
+    <div id="friends" ng-if="profileData.isFriend">
         <div id="friends-header">
-            Friends - <a href="#">{{friends.totalCount}}</a> total
+            Friends - <a href="#/users/{{profileOwner}}/friends">{{friends.totalCount}}</a> total
         </div>
         <div class="friend-review" ng-repeat="friend in friends.friends">
             <a href="#/users/{{friend.username}}">
