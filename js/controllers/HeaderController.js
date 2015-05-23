@@ -5,8 +5,11 @@ app.controller('HeaderController', function($scope, authentication, headerServic
 
     $scope.userData = {};
 
-    $scope.userData.username = localStorage['username'];
-    $scope.userData.profilePicture = localStorage['profilePicture'] || 'images/no-avatar.png';
+    headerService.getPreviewDataAboutMe(authentication.GetHeaders(),
+    function(data) {
+        $scope.userData.profilePicture = data.profileImageData;
+        $scope.userData.username = data.username;
+    });
 
     headerService.getPendingRequests(
         authentication.GetHeaders(),

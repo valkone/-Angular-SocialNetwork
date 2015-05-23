@@ -1,7 +1,7 @@
 <div id="header" ng-controller="HeaderController">
     <div class="wrapper">
             <div id="avatar">
-                <img src="{{userData.profilePicture}}" width="50" height="50"/>
+                <img ng-src="{{userData.profilePicture || 'images/no-avatar.png'}}" width="50" height="50"/>
             </div>
             <div id="avatar-username"><a href="#/home">{{userData.username}}</a></div>
         <div id="menu">

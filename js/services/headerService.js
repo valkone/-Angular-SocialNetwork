@@ -42,5 +42,15 @@ app.factory('headerService', function ($http, baseServiceUrl) {
         });
     };
 
+    userData.getPreviewDataAboutMe = function(headers, success) {
+        $http({
+            method: 'get',
+            url: baseServiceUrl + '/api/me',
+            headers: headers
+        }).success(function(data){
+            success(data);
+        });
+    };
+
     return userData;
 });
