@@ -31,7 +31,7 @@
                 <div class="feed-header-right">
 
                     <div class="feed-name"><a href="#/users/{{feed.author.username}}">{{feed.author.name}}</a></div>
-                    <div class="feed-date">{{feed.date}}</div>
+                    <div class="feed-date">{{feed.date | date : 'd.M.yyyy H:mm:ss'}}</div>
                 </div>
             </div>
             <div class="feed-content">
@@ -47,12 +47,13 @@
                         <span ng-if="feed.author.username == feedOwner"><a href="javascript: void(0);" ng-click="showEditField(feed.id)">Edit •</a></span>
                         <span ng-if="feed.wallOwner.username == feedOwner || feed.author.username == feedOwner"><a href="javascript: void(0);" ng-click="deletePost(feed.id)">Delete •</a></span>
                         <span class="likesCount">{{feed.likesCount}}</span>
-                        <a href="javascript: void(0);" ng-if="!feed.liked" ng-click="likePost(feed.id)">Like</a>
+                        <a href="javascript: void(0);" ng-if="!feed.liked && (profileData.isFriend || feed.author.isFriend)" ng-click="likePost(feed.id)">Like</a>
                         <a href="javascript: void(0);" ng-if="feed.liked" ng-click="dislikePost(feed.id)">Dislike</a>
+                        <span ng-if="!feed.author.isFriend && !profileData.isFriend ">Likes</span>
                     </div>
                     <div class="clear"></div>
                 </div>
-                <div class="comments" id="comments">
+                <div class="comments" id="comments{{feed.id}}{{comment.id}}">
                     <div class="comment" ng-repeat="comment in feed.comments" id="comment{{feed.id}}{{comment.id}}">
                         <div style="display: none;" ng-if="feedOwner != comment.author.username" ng-mouseover="showCommentUserInfo(feed.id, comment.id, comment.author.username)"
                              ng-mouseleave="hideCommentUserInfo(feed.id, comment.id)" class="userInfoPopup" id="popupComment{{feed.id}}{{comment.id}}">
@@ -69,7 +70,7 @@
                         <div class="comment-right">
                             <div class="comment-header">
                                 <span class="comment-name"><a href="#/users/{{comment.author.username}}">{{comment.author.name}}</a></span>
-                                <span class="comment-date">{{comment.date}}</span>
+                                <span class="comment-date">{{comment.date | date : 'd.M.yyyy H:mm:ss'}}</span>
                                 <div class="comment-content" style="display: block;" id="commentContent{{comment.id}}">{{comment.commentContent}}</div>
                                 <div style="display: none;" id="editComment{{comment.id}}" class="edit-comment">
                                     <textarea class="reply-input" id="editedComment{{comment.id}}">{{comment.commentContent}}</textarea>
@@ -78,7 +79,7 @@
                             </div>
                         </div>
                         <span class="editComment">
-                            <a href="javascript:  void(0);" ng-if="feedOwner == comment.author.username" ng-click="deleteComment(comment.id, feed.id)">Delete •</a>
+                            <a href="javascript:  void(0);" ng-if="feedOwner == comment.author.username || feed.author.username == feedOwner" ng-click="deleteComment(comment.id, feed.id)">Delete •</a>
                             <a href="javascript: void(0);" ng-if="feedOwner == comment.author.username" ng-click="toggleEditComment(comment.id)">Edit •</a>
                             <span ng-if="!comment.liked">{{comment.likesCount}} <a href="javascript: void(0);" ng-click="likeComment(comment.id, feed.id)">Like</a></span>
                             <span ng-if="comment.liked">{{comment.likesCount}} <a href="javascript: void(0);" ng-click="dislikeComment(comment.id, feed.id)">Dislike</a></span>
@@ -86,7 +87,7 @@
                         <div class="clear"></div>
                     </div>
                 </div>
-                <div class="post-reply">
+                <div class="post-reply" ng-if="profileData.isFriend || feed.author.isFriend">
                     <form>
                         <input type="text" class="reply-input" ng-model="comment" placeholder="Comment" />
                         <input type="submit" value="Reply" ng-click="postComment(feed.id)" class="reply-button" />
@@ -94,7 +95,7 @@
                 </div>
             </div>
         </div>
-        <div id="loader" ng-if="feedNumber > 5"><img src="http://www1.altisprofessional.com/Images/loader.gif" width="40" height="40" /></div>
+        <div id="loader" ng-if="feedNumber >= 5"><img src="images/loader.gif" width="40" height="40" /></div>
     </div>
     <div id="friends" ng-if="profileData.isFriend">
         <div id="friends-header">

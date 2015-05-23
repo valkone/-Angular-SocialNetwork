@@ -2,7 +2,7 @@ app.controller('FeedController', function($scope, $sce, $http, baseServiceUrl, f
     $scope.comment = '';
     $scope.postContent = '';
     $scope.feedOwner = localStorage['username'];
-
+    $scope.profileOwner = $route.current.params.username;
 
     if($route.current.loadedTemplateUrl == "templates/partial/user.html") {
         if($route.current.params.username != localStorage['username']){
@@ -220,7 +220,7 @@ app.controller('FeedController', function($scope, $sce, $http, baseServiceUrl, f
                         if(_this.feeds[feed].comments[comment].id == commentId) {
                             delete _this.feeds[feed].comments[comment].commentContent;
 
-                            var parent = document.getElementById("comments");
+                            var parent = document.getElementById("comments" + postId);
                             var child = document.getElementById("comment" + postId + '' + commentId);
                             parent.removeChild(child);
                         }
@@ -313,6 +313,8 @@ app.controller('FeedController', function($scope, $sce, $http, baseServiceUrl, f
                     document.getElementById('loader').style.display = 'none';
                 }
             })
+        } else {
+            document.getElementById('loader').style.display = 'none';
         }
 
     };
@@ -334,7 +336,19 @@ app.controller('FeedController', function($scope, $sce, $http, baseServiceUrl, f
                         document.getElementById('loader').style.display = 'none';
                     }
                 })
+        } else {
+            document.getElementById('loader').style.display = 'none';
         }
 
     };
+
+    $scope.isMyFriend = function(username){
+        feedService.isMyFriend(username, authentication.GetHeaders(),
+        function(data) {
+            if(data.isFriend) {
+                return true;
+            }
+            return false;
+        })
+    }
 });
