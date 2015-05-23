@@ -833,6 +833,7 @@ hr {
 .editComment {
     float: right;
     padding: 5px;
+    font-size: 14px;
 }
 
 .editComment a {

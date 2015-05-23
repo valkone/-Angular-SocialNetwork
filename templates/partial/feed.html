@@ -63,7 +63,8 @@
                         <span class="editComment">
                             <a href="javascript:  void(0);" ng-if="feedOwner == comment.author.username" ng-click="deleteComment(comment.id, feed.id)">Delete •</a>
                             <a href="javascript: void(0);" ng-if="feedOwner == comment.author.username" ng-click="toggleEditComment(comment.id)">Edit •</a>
-                            <a href="javascript: void(0);" ng-click="likeComment(comment.id, feed.id)">Like</a>
+                            <span ng-if="!comment.liked">{{comment.likesCount}} <a href="javascript: void(0);" ng-click="likeComment(comment.id, feed.id)">Like</a></span>
+                            <span ng-if="comment.liked">{{comment.likesCount}} <a href="javascript: void(0);" ng-click="dislikeComment(comment.id, feed.id)">Dislike</a></span>
                         </span>
                         <div class="clear"></div>
                     </div>

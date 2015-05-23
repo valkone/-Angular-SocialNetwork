@@ -259,12 +259,39 @@ app.controller('FeedController', function($scope, $sce, $http, baseServiceUrl, f
         })
     };
 
-    $scope.addToFriendList = function(note) {
-        var username = note.getAttribute('username');
-        userService.addToFriendList(username,
+    $scope.likeComment = function(commentId, postId) {
+        var _this = this;
+        feedService.likeComment(commentId, postId,
+        authentication.GetHeaders(),
+        function(data){
+            for(var feed in _this.feeds) {
+                if(_this.feeds[feed].id == postId) {
+                    for(var comment in _this.feeds[feed].comments) {
+                        if(_this.feeds[feed].comments[comment].id == commentId) {
+                            _this.feeds[feed].comments[comment].likesCount++;
+                            _this.feeds[feed].comments[comment].liked = true;
+                        }
+                    }
+                }
+            }
+        });
+    };
+
+    $scope.dislikeComment = function(commentId, postId) {
+        var _this = this;
+        feedService.dislikeComment(commentId, postId,
             authentication.GetHeaders(),
             function(data){
-                console.log(data);
-            })
+                for(var feed in _this.feeds) {
+                    if(_this.feeds[feed].id == postId) {
+                        for(var comment in _this.feeds[feed].comments) {
+                            if(_this.feeds[feed].comments[comment].id == commentId) {
+                                _this.feeds[feed].comments[comment].likesCount--;
+                                _this.feeds[feed].comments[comment].liked = false;
+                            }
+                        }
+                    }
+                }
+            });
     }
 });

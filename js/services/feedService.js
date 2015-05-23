@@ -146,6 +146,26 @@ app.factory('feedService', function ($http, baseServiceUrl) {
         })
     };
 
+    data.likeComment = function(commentId, feedId, headers, success) {
+        $http({
+            method: 'post',
+            url: baseServiceUrl + '/api/posts/' + feedId + '/comments/' + commentId + '/likes',
+            headers: headers
+        }).success(function(data){
+            success(data);
+        })
+    };
+
+    data.dislikeComment = function(commentId, feedId, headers, success) {
+        $http({
+            method: 'delete',
+            url: baseServiceUrl + '/api/posts/' + feedId + '/comments/' + commentId + '/likes',
+            headers: headers
+        }).success(function(data){
+            success(data);
+        })
+    };
+
 
     return data;
 });
