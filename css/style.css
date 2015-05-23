@@ -887,3 +887,7 @@ hr {
     padding: 5px;
 
 }
+
+.feed-name, .feed-content {
+    word-wrap: break-word;
+}

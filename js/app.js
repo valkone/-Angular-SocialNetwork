@@ -9,11 +9,11 @@ app.config(function ($routeProvider) {
     });
     $routeProvider.when('/login', {
         templateUrl: 'templates/partial/login.html',
-        controller: 'HomeController'
+        controller: 'AuthenticationController'
     });
     $routeProvider.when('/register', {
         templateUrl: 'templates/partial/register.html',
-        controller: 'HomeController'
+        controller: 'AuthenticationController'
     });
     $routeProvider.when('/home', {
         templateUrl: 'templates/partial/feed.html',

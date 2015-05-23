@@ -1,4 +1,8 @@
-app.controller('HeaderController', function($scope, authentication, headerService) {
+app.controller('HeaderController', function($scope, authentication, headerService, notifyService, $location) {
+    if(localStorage['username'] == undefined) {
+        $location.path('/');
+    }
+
     $scope.userData = {};
 
     $scope.userData.username = localStorage['username'];
@@ -28,6 +32,8 @@ app.controller('HeaderController', function($scope, authentication, headerServic
         var _this = this;
         headerService.requestApprove(id, authentication.GetHeaders(),
         function(data) {
+            notifyService.showInfo('The request is approved');
+            $scope.userData.pendingRequestsCount--;
             var tempArray = [];
             for(var request in _this.userData.pendingRequests) {
                 if(_this.userData.pendingRequests[request].id != id) {
@@ -42,6 +48,8 @@ app.controller('HeaderController', function($scope, authentication, headerServic
         var _this = this;
         headerService.requestReject(id, authentication.GetHeaders(),
             function(data) {
+                $scope.userData.pendingRequestsCount--;
+                notifyService.showInfo('The request is rejected');
                 var tempArray = [];
                 for(var request in _this.userData.pendingRequests) {
                     if(_this.userData.pendingRequests[request].id != id) {

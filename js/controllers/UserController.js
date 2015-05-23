@@ -1,9 +1,8 @@
-app.controller('UserController', function($scope, $http, baseServiceUrl, userService, authentication, $route) {
+app.controller('UserController', function($scope, $http, baseServiceUrl, userService, authentication, $route, notifyService) {
     $scope.userData = '';
     $scope.profileData = '';
     $scope.profileOwner = $route.current.params.username;
     $scope.me = localStorage['username'];
-    $scope.testvamsi = 'dqwdqwd';
 
     $scope.openFileUploaderForAvatar = function() {
         document.getElementById('fileUploaderForAvatar').click();
@@ -21,7 +20,7 @@ app.controller('UserController', function($scope, $http, baseServiceUrl, userSer
                 if(e.total <= 1280) {
                     document.getElementById("avatarPic").src = e.target.result;
                 } else {
-                    console.log('File too big');
+                    notifyService.showError('File too big');
                 }
             };
             reader.readAsDataURL(photofile);
@@ -36,7 +35,7 @@ app.controller('UserController', function($scope, $http, baseServiceUrl, userSer
                 if(e.total <= 1280) {
                     document.getElementById("coverPic").src = e.target.result;
                 } else {
-                    console.log('File too big');
+                    notifyService.showError('File too big');
                 }
             };
             reader.readAsDataURL(photofile);
@@ -87,7 +86,7 @@ app.controller('UserController', function($scope, $http, baseServiceUrl, userSer
             }, authentication.GetHeaders(),
         function(data) {
             localStorage['profilePicture'] = profilePic;
-            console.log('success');
+            notifyService.showInfo('You successfully updated your profile');
         });
     };
 
@@ -100,7 +99,7 @@ app.controller('UserController', function($scope, $http, baseServiceUrl, userSer
             },
             authentication.GetHeaders(),
             function(data) {
-                console.log(data);
+                notifyService.showInfo(data.message);
             }
         )
     };

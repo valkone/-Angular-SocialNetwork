@@ -1,4 +1,4 @@
-app.factory('userService', function ($http, baseServiceUrl) {
+app.factory('userService', function ($http, baseServiceUrl, notifyService) {
 
     var userData = {};
 
@@ -32,6 +32,8 @@ app.factory('userService', function ($http, baseServiceUrl) {
             data: data
         }).success(function(data){
             success(data);
+        }).error(function(error){
+            notifyService.showError('Wrong password');
         });
     };
 
@@ -72,6 +74,8 @@ app.factory('userService', function ($http, baseServiceUrl) {
             headers: headers
         }).success(function(data){
             success(data);
+        }).error(function(error){
+            notifyService.showError(error.message);
         });
     };
 

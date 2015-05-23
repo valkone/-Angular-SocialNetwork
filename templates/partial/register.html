@@ -1,7 +1,8 @@
+<div ng-controller="GuestUsersController"></div>
 <div id="main-container">
     <div id="main-title" class="center">Register</div>
     <div id="box">
-        <form name="form" ng-controller="AuthenticationController" ng-submit="register()">
+        <form name="form" ng-submit="register()">
             <input type="text" placeholder="Username" name="username" ng-model="registerData.username" class="input" required /><br />
             <span ng-show="form.username.$error.required && form.username.$dirty">
                     Invalid username<br />

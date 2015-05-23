@@ -1,8 +1,41 @@
-app.controller('FeedController', function($scope, $sce, $http, baseServiceUrl, feedService, userService, authentication, $route) {
+app.controller('FeedController', function($scope, $sce, $http, baseServiceUrl, feedService, userService,
+                                          authentication, $route, notifyService) {
+
+    if(localStorage['accessToken'] != undefined) {
+        document.body.style.backgroundImage = "";
+        document.body.style.backgroundColor = "#f6f6f6";
+    } else {
+        document.body.style.backgroundColor = "";
+        document.body.style.backgroundImage = "url('images/home-background.jpg')";
+    }
+
     $scope.comment = '';
     $scope.postContent = '';
     $scope.feedOwner = localStorage['username'];
     $scope.profileOwner = $route.current.params.username;
+
+    if($route.current.loadedTemplateUrl == "templates/partial/user.html")
+    {
+        feedService.getProfileFeeds(
+            $route.current.params.username,
+            authentication.GetHeaders(),
+            function(data){
+                if(data.length > 0) {
+                    $scope.feeds = data;
+                    $scope.lastFeedId = data[data.length - 1].id;
+                    $scope.feedNumber = data.length;
+                }
+            });
+    } else {
+        feedService.getNewsFeed(authentication.GetHeaders(),
+            function (data) {
+                if(data.length > 0) {
+                    $scope.feeds = data;
+                    $scope.lastFeedId = data[data.length - 1].id;
+                    $scope.feedNumber = data.length;
+                }
+            });
+    }
 
     if($route.current.loadedTemplateUrl == "templates/partial/user.html") {
         if($route.current.params.username != localStorage['username']){
@@ -20,54 +53,45 @@ app.controller('FeedController', function($scope, $sce, $http, baseServiceUrl, f
             });
     }
 
-    if($route.current.loadedTemplateUrl == "templates/partial/user.html")
-    {
-        feedService.getProfileFeeds(
-            $route.current.params.username,
-            authentication.GetHeaders(),
-            function(data){
-                $scope.feeds = data;
-                $scope.lastFeedId = data[data.length - 1].id;
-                $scope.feedNumber = data.length;
-            });
-    } else {
-        feedService.getNewsFeed(authentication.GetHeaders(),
-            function (data) {
-                $scope.feeds = data;
-                $scope.lastFeedId = data[data.length - 1].id;
-                $scope.feedNumber = data.length;
-            });
-    }
-
 
     $scope.postComment = function(postId) {
         var _this = this;
-        feedService.publishComment(postId,
-            {
-                commentContent: this.comment
-            },
-            authentication.GetHeaders(),
-            function(data) {
-                for(feed in _this.feeds) {
-                    if(_this.feeds[feed].id == postId) {
-                        _this.feeds[feed].comments.push(data);
+        if(this.comment != null && this.comment != '') {
+            feedService.publishComment(postId,
+                {
+                    commentContent: this.comment
+                },
+                authentication.GetHeaders(),
+                function(data) {
+                    document.getElementById('replyInput' + postId).value = '';
+                    for(var feed in _this.feeds) {
+                        if(_this.feeds[feed].id == postId) {
+                            _this.feeds[feed].comments.push(data);
+                        }
                     }
-                }
-            })
+                })
+        } else {
+            notifyService.showError('The comment cannot be empty');
+        }
     };
 
     $scope.addPost = function(user) {
         var _this = this;
-        feedService.addPost(
-            {
-                postContent: this.postContent,
-                username: user
-            },
-            authentication.GetHeaders(),
-            function(data) {
-                _this.feeds.unshift(data);
-            }
-        )
+        if(this.postContent) {
+            feedService.addPost(
+                {
+                    postContent: this.postContent,
+                    username: user
+                },
+                authentication.GetHeaders(),
+                function(data) {
+                    document.getElementById('new-post-textarea').value = '';
+                    _this.feeds.unshift(data);
+                }
+            )
+        } else {
+            notifyService.showError('The post cannot be empty');
+        }
     };
 
     $scope.showAllComments = function(id) {
@@ -187,25 +211,30 @@ app.controller('FeedController', function($scope, $sce, $http, baseServiceUrl, f
     $scope.editComment = function(commentId, feedId) {
         var editedComment = document.getElementById('editedComment' + commentId).value;
         var _this = this;
-        feedService.editComment(commentId, feedId,
-            {
-                commentContent: editedComment
-            },
-            authentication.GetHeaders(),
-            function(data) {
-                for(var feed in _this.feeds) {
-                    if(_this.feeds[feed].id == feedId) {
-                        for(var comment in _this.feeds[feed].comments) {
-                            if(_this.feeds[feed].comments[comment].id == commentId) {
-                                _this.feeds[feed].comments[comment].commentContent = data.commentContent;
-                                document.getElementById('commentContent' + commentId).style.display = 'block';
-                                document.getElementById('editComment' + commentId).style.display = 'none';
+
+        if(editedComment) {
+            feedService.editComment(commentId, feedId,
+                {
+                    commentContent: editedComment
+                },
+                authentication.GetHeaders(),
+                function(data) {
+                    for(var feed in _this.feeds) {
+                        if(_this.feeds[feed].id == feedId) {
+                            for(var comment in _this.feeds[feed].comments) {
+                                if(_this.feeds[feed].comments[comment].id == commentId) {
+                                    _this.feeds[feed].comments[comment].commentContent = data.commentContent;
+                                    document.getElementById('commentContent' + commentId).style.display = 'block';
+                                    document.getElementById('editComment' + commentId).style.display = 'none';
+                                }
                             }
                         }
                     }
                 }
-            }
-        )
+            )
+        } else {
+            notifyService.showError('The comment cannot be empty');
+        }
     };
 
     $scope.deleteComment = function(commentId, postId) {
@@ -231,35 +260,38 @@ app.controller('FeedController', function($scope, $sce, $http, baseServiceUrl, f
     };
 
     $scope.showCommentUserInfo = function(feedId, commentId, commentOwner) {
-        if(document.getElementById('popupFriendStatus' + feedId + '' + commentId).innerText == '') {
-            feedService.getUserPreviewData(commentOwner, authentication.GetHeaders(),
-            function(data) {
-                if(data.isFriend) {
-                    document.getElementById('popupFriendStatus' + feedId + '' + commentId).innerText = 'friend';
-                } else if(data.hasPendingRequest) {
-                    document.getElementById('popupFriendStatus' + feedId + '' + commentId).innerText = 'pending';
-                } else {
-                    document.getElementById('popupFriendStatus' + feedId + '' + commentId).innerHTML =
-                        '<a href="javascript: void(0);" username="' + commentOwner + '" id="test" onclick="angular.element(this).scope().addToFriendList(this)">add to friend list</a>';
-                }
-
+        if(document.getElementById('popupFriendStatus' + feedId + '' + commentId)) {
+            if(document.getElementById('popupFriendStatus' + feedId + '' + commentId).innerText == '') {
                 document.getElementById('popupComment' + feedId + '' + commentId).style.display = 'block';
-            });
-        } else {
-            document.getElementById('popupComment' + feedId + '' + commentId).style.display = 'block';
+                feedService.getUserPreviewData(commentOwner, authentication.GetHeaders(),
+                function(data) {
+                    if(data.isFriend) {
+                        document.getElementById('popupFriendStatus' + feedId + '' + commentId).innerText = 'friend';
+                    } else if(data.hasPendingRequest) {
+                        document.getElementById('popupFriendStatus' + feedId + '' + commentId).innerText = 'pending';
+                    } else {
+                        document.getElementById('popupFriendStatus' + feedId + '' + commentId).innerHTML =
+                            '<a href="javascript: void(0);" username="' + commentOwner + '" id="test" onclick="angular.element(this).scope().addToFriendList(this)">add to friend list</a>';
+                    }
+
+                });
+            } else {
+                document.getElementById('popupComment' + feedId + '' + commentId).style.display = 'block';
+            }
         }
     };
 
     $scope.hideCommentUserInfo = function(feedId, commentId) {
-        document.getElementById('popupComment' + feedId + '' + commentId).style.display = 'none';
+        if(document.getElementById('popupComment' + feedId + '' + commentId)) {
+            document.getElementById('popupComment' + feedId + '' + commentId).style.display = 'none';
+        }
     };
 
-    $scope.addToFriendList = function(note) {
-        var username = note.getAttribute('username');
+    $scope.addToFriendList = function(username) {
         userService.addToFriendList(username,
         authentication.GetHeaders(),
         function(data){
-            console.log(data);
+            notifyService.showInfo(data.message);
         })
     };
 
@@ -305,16 +337,22 @@ app.controller('FeedController', function($scope, $sce, $http, baseServiceUrl, f
             feedService.getNextFeeds(lastFeedId, authentication.GetHeaders(),
             function(data) {
                 if(data.length > 0) {
-                    var newFeeds = $scope.feeds.concat(data);
-                    var lastFeedId = data[data.length - 1].id;
-                    $scope.feeds = newFeeds;
-                    document.getElementById('news-feed').setAttribute('last-feedId', lastFeedId);
+                    if($scope.feeds) {
+                        var newFeeds = $scope.feeds.concat(data);
+                        var lastFeedId = data[data.length - 1].id;
+                        $scope.feeds = newFeeds;
+                        document.getElementById('news-feed').setAttribute('last-feedId', lastFeedId);
+                    }
                 } else {
-                    document.getElementById('loader').style.display = 'none';
+                    if(document.getElementById('loader')) {
+                        document.getElementById('loader').style.display = 'none';
+                    }
                 }
             })
         } else {
-            document.getElementById('loader').style.display = 'none';
+            if(document.getElementById('loader')) {
+                document.getElementById('loader').style.display = 'none';
+            }
         }
 
     };
@@ -333,22 +371,26 @@ app.controller('FeedController', function($scope, $sce, $http, baseServiceUrl, f
                         $scope.feeds = newFeeds;
                         document.getElementById('news-feed').setAttribute('last-wallFeedId', lastFeedId);
                     } else {
-                        document.getElementById('loader').style.display = 'none';
+                        if(document.getElementById('loader')) {
+                            document.getElementById('loader').style.display = 'none';
+                        }
                     }
                 })
         } else {
-            document.getElementById('loader').style.display = 'none';
+            if(document.getElementById('loader')) {
+                document.getElementById('loader').style.display = 'none';
+            }
         }
 
     };
 
-    $scope.isMyFriend = function(username){
-        feedService.isMyFriend(username, authentication.GetHeaders(),
-        function(data) {
-            if(data.isFriend) {
-                return true;
-            }
-            return false;
-        })
+    $scope.showCommentField = function(feedId) {
+        var commentNode = document.getElementById('postReply' + feedId);
+
+        if(commentNode.style.getPropertyValue('display') == 'block') {
+            commentNode.style.display = 'none';
+        } else {
+            commentNode.style.display = 'block';
+        }
     }
 });

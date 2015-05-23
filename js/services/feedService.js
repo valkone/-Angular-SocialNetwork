@@ -1,4 +1,4 @@
-app.factory('feedService', function ($http, baseServiceUrl) {
+app.factory('feedService', function ($http, baseServiceUrl, notifyService) {
 
     var data = {};
 
@@ -33,11 +33,13 @@ app.factory('feedService', function ($http, baseServiceUrl) {
         });
     };
 
-    data.publishComment = function (postId, data, headers, success, error) {
+    data.publishComment = function (postId, data, headers, success) {
         $http.post(baseServiceUrl + '/api/posts/' + postId + '/comments', data, {headers: headers})
             .success(function (data, status, headers, config) {
                 success(data);
-            }).error(error);
+            }).error(function(error){
+                notifyService.showError(error.message)
+            });
     };
 
     data.getAllComments = function (id, headers, success) {
@@ -123,6 +125,8 @@ app.factory('feedService', function ($http, baseServiceUrl) {
             data: data
         }).success(function(data){
             success(data);
+        }).error(function(error){
+            notifyService.showError(error.message);
         })
     };
 

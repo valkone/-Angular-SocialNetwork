@@ -30,8 +30,9 @@
                             <span ng-if="feed.author.username == feedOwner"><a href="javascript: void(0);" ng-click="showEditField(feed.id)">Edit •</a></span>
                             <span ng-if="feed.wallOwner.username == feedOwner || feed.author.username == feedOwner"><a href="javascript: void(0);" ng-click="deletePost(feed.id)">Delete •</a></span>
                             <span class="likesCount">{{feed.likesCount}}</span>
-                            <a href="javascript: void(0);" ng-if="!feed.liked" ng-click="likePost(feed.id)">Like</a>
-                            <a href="javascript: void(0);" ng-if="feed.liked" ng-click="dislikePost(feed.id)">Dislike</a>
+                            <a href="javascript: void(0);" ng-if="!feed.liked" ng-click="likePost(feed.id)">Like •</a>
+                            <a href="javascript: void(0);" ng-if="feed.liked" ng-click="dislikePost(feed.id)">Dislike •</a>
+                            <a href="javascript: void(0);" ng-click="showCommentField(feed.id)">Comment</a>
                         </div>
                         <div class="clear"></div>
                 </div>
@@ -39,7 +40,7 @@
                     <div class="comment" ng-repeat="comment in feed.comments" id="comment{{feed.id}}{{comment.id}}">
                         <div style="display: none;" ng-if="feedOwner != comment.author.username" ng-mouseover="showCommentUserInfo(feed.id, comment.id, comment.author.username)"
                              ng-mouseleave="hideCommentUserInfo(feed.id, comment.id)" class="userInfoPopup" id="popupComment{{feed.id}}{{comment.id}}">
-                            <a href="#/users/feed.author.username">
+                            <a href="#/users/{{feed.author.username}}">
                                 <img ng-src="{{comment.author.profileImageData || 'images/no-avatar.png'}}" width="35" height="35" />
                                 {{comment.author.name}}
                             </a>
@@ -69,9 +70,9 @@
                         <div class="clear"></div>
                     </div>
                 </div>
-                <div class="post-reply">
+                <div class="post-reply" style="display: none;" id="postReply{{feed.id}}">
                     <form>
-                        <input type="text" class="reply-input" ng-model="comment" placeholder="Comment" />
+                        <input type="text" class="reply-input" id="replyInput{{feed.id}}" ng-model="comment" placeholder="Comment" />
                         <input type="submit" value="Reply" ng-click="postComment(feed.id)" class="reply-button" />
                     </form>
                 </div>
