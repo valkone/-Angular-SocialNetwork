@@ -33,8 +33,8 @@
                         </div>
                         <div class="clear"></div>
                 </div>
-                <div class="comments">
-                    <div class="comment" ng-repeat="comment in feed.comments">
+                <div class="comments" id="comments">
+                    <div class="comment" ng-repeat="comment in feed.comments" id="comment{{feed.id}}{{comment.id}}">
                         <div class="comment-pic">
                             <a href="#/users/{{comment.author.username}}"><img ng-src="{{comment.author.profileImageData || 'images/no-avatar.png'}}" height="35px" /></a>
                         </div>
@@ -50,7 +50,9 @@
                             </div>
                         </div>
                         <span class="editComment" ng-if="feedOwner == comment.author.username">
-                            <a href="javascript: void(0);" ng-click="toggleEditComment(comment.id)">Edit</a></span>
+                            <a href="javascript: void(0);" ng-click="deleteComment(comment.id, feed.id)">Delete •</a>
+                            <a href="javascript: void(0);" ng-click="toggleEditComment(comment.id)">Edit</a>
+                        </span>
                         <div class="clear"></div>
                     </div>
                 </div>

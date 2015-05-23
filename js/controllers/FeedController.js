@@ -159,7 +159,6 @@ app.controller('FeedController', function($scope, $sce, $http, baseServiceUrl, f
                 if(_this.feeds[feed].id == id) {
                     delete _this.feeds[feed].postContent;
 
-
                     var parent = document.getElementById("news-feed");
                     var child = document.getElementById("feed" + id);
                     parent.removeChild(child);
@@ -193,13 +192,37 @@ app.controller('FeedController', function($scope, $sce, $http, baseServiceUrl, f
                 for(var feed in _this.feeds) {
                     if(_this.feeds[feed].id == feedId) {
                         for(var comment in _this.feeds[feed].comments) {
-                            _this.feeds[feed].comments[comment].commentContent = data.commentContent;
-                            document.getElementById('commentContent' + commentId).style.display = 'block';
-                            document.getElementById('editComment' + commentId).style.display = 'none';
+                            if(_this.feeds[feed].comments[comment].id == commentId) {
+                                _this.feeds[feed].comments[comment].commentContent = data.commentContent;
+                                document.getElementById('commentContent' + commentId).style.display = 'block';
+                                document.getElementById('editComment' + commentId).style.display = 'none';
+                            }
                         }
                     }
                 }
             }
         )
-    }
+    };
+
+    $scope.deleteComment = function(commentId, postId) {
+        var _this = this;
+
+        feedService.deleteComment(commentId, postId,
+        authentication.GetHeaders(),
+        function(data) {
+            for(var feed in _this.feeds) {
+                if(_this.feeds[feed].id == postId) {
+                    for(var comment in _this.feeds[feed].comments) {
+                        if(_this.feeds[feed].comments[comment].id == commentId) {
+                            delete _this.feeds[feed].comments[comment].commentContent;
+
+                            var parent = document.getElementById("comments");
+                            var child = document.getElementById("comment" + postId + '' + commentId);
+                            parent.removeChild(child);
+                        }
+                    }
+                }
+            }
+        })
+    };
 });
