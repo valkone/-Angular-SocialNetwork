@@ -5,14 +5,16 @@
     <hr />
     <div id="edit-profile">
         <form name="form">
-            <div id="edit-profile-left">
-                <img ng-src="{{userData.profileImageData || 'images/no-avatar.png'}}"  width="150" height="150" />
 
+            <div id="edit-profile-left">
+                <img id="avatarPic" ng-src="{{userData.profileImageData || 'images/no-avatar.png'}}"  width="150" height="150" />
                 <div id="avatar-specifications">
                     Allowed format: .jpg<br />
                     Limit: 128kb
                 </div>
-                <button class="input-button">UPLOAD</button>
+                <button class="input-button" ng-click="openFileUploaderForAvatar()">UPLOAD</button>
+                <input style="display: none;" type="file" accept="image/jpeg"
+                       onchange="angular.element(this).scope().uploadAvatar(this)" id="fileUploaderForAvatar" />
             </div>
             <div id="edit-profile-right">
                 <input type="text" placeholder="Name" name="username" ng-model="userData.name" class="input" required /><br />
@@ -31,13 +33,15 @@
                 </div>
                 <div id="change-cover">
                     <div id="change-cover-left">
-                        <button class="input-button">UPLOAD</button>
+                        <button class="input-button" ng-click="openFileUploaderForCover()">UPLOAD</button>
+                        <input style="display: none;" type="file" accept="image/jpeg"
+                               onchange="angular.element(this).scope().uploadCover(this)" id="fileUploaderForCover" />
                         <div id="cover-specifications">
                             Limit: 128kb
                         </div>
                     </div>
                     <div id="change-cover-right">
-                        <img ng-src="{{userData.coverImageData || 'images/no-cover.jpg'}}" width="360" height="90" />
+                        <img id="coverPic" ng-src="{{userData.coverImageData || 'images/no-cover.jpg'}}" width="360" height="90" />
                     </div>
                 </div>
                 <div class="clear"></div>
