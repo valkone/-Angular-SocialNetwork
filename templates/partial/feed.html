@@ -40,7 +40,7 @@
                     <div class="comment" ng-repeat="comment in feed.comments" id="comment{{feed.id}}{{comment.id}}">
                         <div style="display: none;" ng-if="feedOwner != comment.author.username" ng-mouseover="showCommentUserInfo(feed.id, comment.id, comment.author.username)"
                              ng-mouseleave="hideCommentUserInfo(feed.id, comment.id)" class="userInfoPopup" id="popupComment{{feed.id}}{{comment.id}}">
-                            <a href="#/users/{{feed.author.username}}">
+                            <a href="#/users/{{comment.author.username}}">
                                 <img ng-src="{{comment.author.profileImageData || 'images/no-avatar.png'}}" width="35" height="35" />
                                 {{comment.author.name}}
                             </a>

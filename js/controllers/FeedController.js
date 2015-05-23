@@ -271,7 +271,7 @@ app.controller('FeedController', function($scope, $sce, $http, baseServiceUrl, f
                         document.getElementById('popupFriendStatus' + feedId + '' + commentId).innerText = 'pending';
                     } else {
                         document.getElementById('popupFriendStatus' + feedId + '' + commentId).innerHTML =
-                            '<a href="javascript: void(0);" username="' + commentOwner + '" id="test" onclick="angular.element(this).scope().addToFriendList(this)">add to friend list</a>';
+                            '<a href="javascript: void(0);" username="' + commentOwner + '" id="test" onclick="angular.element(this).scope().addToFriendListFromPopup(this)">add to friend list</a>';
                     }
 
                 });
@@ -293,6 +293,16 @@ app.controller('FeedController', function($scope, $sce, $http, baseServiceUrl, f
         function(data){
             notifyService.showInfo(data.message);
         })
+    };
+
+    $scope.addToFriendListFromPopup = function(note) {
+        var username = note.getAttribute('username');
+        alert(username);
+        userService.addToFriendList(username,
+            authentication.GetHeaders(),
+            function(data){
+                notifyService.showInfo(data.message);
+            })
     };
 
     $scope.likeComment = function(commentId, postId) {
