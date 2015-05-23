@@ -1,6 +1,7 @@
 <header ng-include="'templates/partial/header.html'"></header>
 
 <div class="wrapper" ng-controller="FeedController" id="{{wrapperStyle}}">
+
     <div id="cover">
         <div id="cover-image"><img ng-src="{{profileData.coverImageData || 'images/no-cover.jpg'}}" width="625" height="150" /></div>
         <div id="cover-avatar">
@@ -18,7 +19,7 @@
             </form>
         </div>
     </div>
-    <div id="news-feed">
+    <div id="news-feed" scroll2 last-wallFeedId="{{lastFeedId}}">
         <div class="feed" ng-repeat="feed in feeds" id="feed{{feed.id}}">
             <div class="feed-header">
                 <div class="feed-header-left">
@@ -93,6 +94,7 @@
                 </div>
             </div>
         </div>
+        <div id="loader" ng-if="feedNumber > 5"><img src="http://www1.altisprofessional.com/Images/loader.gif" width="40" height="40" /></div>
     </div>
     <div id="friends" ng-if="profileData.isFriend">
         <div id="friends-header">

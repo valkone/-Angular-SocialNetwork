@@ -27,11 +27,15 @@ app.controller('FeedController', function($scope, $sce, $http, baseServiceUrl, f
             authentication.GetHeaders(),
             function(data){
                 $scope.feeds = data;
+                $scope.lastFeedId = data[data.length - 1].id;
+                $scope.feedNumber = data.length;
             });
     } else {
         feedService.getNewsFeed(authentication.GetHeaders(),
             function (data) {
                 $scope.feeds = data;
+                $scope.lastFeedId = data[data.length - 1].id;
+                $scope.feedNumber = data.length;
             });
     }
 
@@ -293,5 +297,44 @@ app.controller('FeedController', function($scope, $sce, $http, baseServiceUrl, f
                     }
                 }
             });
-    }
+    };
+
+    $scope.test = function(a) {
+        if(a != null && a != '') {
+            var lastFeedId = a[0].attributes['last-feedid'].nodeValue;
+            feedService.getNextFeeds(lastFeedId, authentication.GetHeaders(),
+            function(data) {
+                if(data.length > 0) {
+                    var newFeeds = $scope.feeds.concat(data);
+                    var lastFeedId = data[data.length - 1].id;
+                    $scope.feeds = newFeeds;
+                    document.getElementById('news-feed').setAttribute('last-feedId', lastFeedId);
+                } else {
+                    document.getElementById('loader').style.display = 'none';
+                }
+            })
+        }
+
+    };
+
+    $scope.test2 = function(a) {
+
+        if(a != null && a != '') {
+            var lastWallFeedId = a[0].attributes['last-wallFeedId'].nodeValue;
+            var wallOwner = $route.current.params.username;
+
+            feedService.getNextWallFeeds(lastWallFeedId, wallOwner, authentication.GetHeaders(),
+                function (data) {
+                    if(data.length > 0) {
+                        var newFeeds = $scope.feeds.concat(data);
+                        var lastFeedId = data[data.length - 1].id;
+                        $scope.feeds = newFeeds;
+                        document.getElementById('news-feed').setAttribute('last-wallFeedId', lastFeedId);
+                    } else {
+                        document.getElementById('loader').style.display = 'none';
+                    }
+                })
+        }
+
+    };
 });

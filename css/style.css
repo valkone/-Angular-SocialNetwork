@@ -874,3 +874,16 @@ hr {
 .likeComment {
     float: right;
 }
+
+.there-is-more {
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width:100%;
+    background:rgb(200,200,200);
+    background:rgba(200,200,200,0.8);
+    color: green;
+    font-weight: bold;
+    padding: 5px;
+
+}

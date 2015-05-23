@@ -166,6 +166,26 @@ app.factory('feedService', function ($http, baseServiceUrl) {
         })
     };
 
+    data.getNextFeeds = function(lastFeedId, headers, success) {
+        $http({
+            method: 'get',
+            url: baseServiceUrl + '/api/me/feed?StartPostId=' + lastFeedId + '&PageSize=10',
+            headers: headers
+        }).success(function(data){
+            success(data);
+        })
+    };
+
+    data.getNextWallFeeds = function(lastWallFeedId, wallOwner, headers, success) {
+        $http({
+            method: 'get',
+            url: baseServiceUrl + '/api/users/' + wallOwner + '/wall?StartPostId=' + lastWallFeedId + '&PageSize=10',
+            headers: headers
+        }).success(function(data){
+            success(data);
+        })
+    };
+
 
     return data;
 });
