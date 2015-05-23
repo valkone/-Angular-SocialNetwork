@@ -1,4 +1,4 @@
-app.controller('FeedController', function($scope, $sce, $http, baseServiceUrl, feedService, authentication, $route) {
+app.controller('FeedController', function($scope, $sce, $http, baseServiceUrl, feedService, userService, authentication, $route) {
     $scope.comment = '';
     $scope.postContent = '';
     $scope.feedOwner = localStorage['username'];
@@ -225,4 +225,46 @@ app.controller('FeedController', function($scope, $sce, $http, baseServiceUrl, f
             }
         })
     };
+
+    $scope.showCommentUserInfo = function(feedId, commentId, commentOwner) {
+        if(document.getElementById('popupFriendStatus' + feedId + '' + commentId).innerText == '') {
+            feedService.getUserPreviewData(commentOwner, authentication.GetHeaders(),
+            function(data) {
+                if(data.isFriend) {
+                    document.getElementById('popupFriendStatus' + feedId + '' + commentId).innerText = 'friend';
+                } else if(data.hasPendingRequest) {
+                    document.getElementById('popupFriendStatus' + feedId + '' + commentId).innerText = 'pending';
+                } else {
+                    document.getElementById('popupFriendStatus' + feedId + '' + commentId).innerHTML =
+                        '<a href="javascript: void(0);" username="' + commentOwner + '" id="test" onclick="angular.element(this).scope().addToFriendList(this)">add to friend list</a>';
+                }
+
+                document.getElementById('popupComment' + feedId + '' + commentId).style.display = 'block';
+            });
+        } else {
+            document.getElementById('popupComment' + feedId + '' + commentId).style.display = 'block';
+        }
+    };
+
+    $scope.hideCommentUserInfo = function(feedId, commentId) {
+        document.getElementById('popupComment' + feedId + '' + commentId).style.display = 'none';
+    };
+
+    $scope.addToFriendList = function(note) {
+        var username = note.getAttribute('username');
+        userService.addToFriendList(username,
+        authentication.GetHeaders(),
+        function(data){
+            console.log(data);
+        })
+    };
+
+    $scope.addToFriendList = function(note) {
+        var username = note.getAttribute('username');
+        userService.addToFriendList(username,
+            authentication.GetHeaders(),
+            function(data){
+                console.log(data);
+            })
+    }
 });

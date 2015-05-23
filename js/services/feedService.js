@@ -136,6 +136,16 @@ app.factory('feedService', function ($http, baseServiceUrl) {
         })
     };
 
+    data.getUserPreviewData = function(username, headers, success) {
+        $http({
+            method: 'get',
+            url: baseServiceUrl + '/api/users/' + username + '/preview',
+            headers: headers
+        }).success(function(data){
+            success(data);
+        })
+    };
+
 
     return data;
 });

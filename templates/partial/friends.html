@@ -15,7 +15,7 @@
     <hr />
 
     <div id="friend-list">
-        <a href="#/users/{{friend.username}}" ng-repeat="friend in friendFriends | filter:searchFriends">
+        <a href="#/users/{{friend.username}}" ng-repeat="friend in friendFriends | filter:{name: searchFriends}">
             <div class="friend">
                 <img ng-src="{{friend.profileImageData || 'images/no-avatar.png'}}" />
                 <div class="friend-name">{{friend.name}}</div>

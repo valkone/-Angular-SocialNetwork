@@ -86,6 +86,7 @@ app.controller('UserController', function($scope, $http, baseServiceUrl, userSer
                 gender: this.userData.gender
             }, authentication.GetHeaders(),
         function(data) {
+            localStorage['profilePicture'] = profilePic;
             console.log('success');
         });
     };

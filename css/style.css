@@ -848,3 +848,28 @@ hr {
     position: relative;
     top: -12px;
 }
+
+.userInfoPopup {
+    background: #fff;
+    border: 1px solid #25ad9f;
+    padding: 10px;
+    width: 400px;
+    position: absolute;
+}
+
+.userInfoPopup a {
+    text-decoration: none;
+    color: #000;
+}
+
+.userInfoPopup a:hover {
+    color: #999;
+}
+
+.popupFriendStatus {
+    float: right;
+}
+
+.likeComment {
+    float: right;
+}

@@ -23,10 +23,12 @@
             <div class="feed-header">
                 <div class="feed-header-left">
                     <div class="feed-pic">
-                        <a href="#/users/{{feed.author.username}}"><img ng-src="{{comment.author.profileImageData || 'images/no-avatar.png'}}" height="48px" /></a>
+                        <a href="#/users/{{feed.author.username}}"><img ng-src="{{feed.author.profileImageData || 'images/no-avatar.png'}}" height="48px" /></a>
                     </div>
                 </div>
+
                 <div class="feed-header-right">
+
                     <div class="feed-name"><a href="#/users/{{feed.author.username}}">{{feed.author.name}}</a></div>
                     <div class="feed-date">{{feed.date}}</div>
                 </div>
@@ -42,7 +44,7 @@
                     <a ng-if="feed.totalCommentsCount > 3" href="javascript: void(0);" ng-click="showAllComments(feed.id)">View all <span>{{feed.totalCommentsCount}} comments</span></a>
                     <div class="post-options">
                         <span ng-if="feed.author.username == feedOwner"><a href="javascript: void(0);" ng-click="showEditField(feed.id)">Edit •</a></span>
-                        <span><a href="javascript: void(0);" ng-click="deletePost(feed.id)">Delete •</a></span>
+                        <span ng-if="feed.wallOwner.username == feedOwner || feed.author.username == feedOwner"><a href="javascript: void(0);" ng-click="deletePost(feed.id)">Delete •</a></span>
                         <span class="likesCount">{{feed.likesCount}}</span>
                         <a href="javascript: void(0);" ng-if="!feed.liked" ng-click="likePost(feed.id)">Like</a>
                         <a href="javascript: void(0);" ng-if="feed.liked" ng-click="dislikePost(feed.id)">Dislike</a>
@@ -51,7 +53,16 @@
                 </div>
                 <div class="comments" id="comments">
                     <div class="comment" ng-repeat="comment in feed.comments" id="comment{{feed.id}}{{comment.id}}">
-                        <div class="comment-pic">
+                        <div style="display: none;" ng-if="feedOwner != comment.author.username" ng-mouseover="showCommentUserInfo(feed.id, comment.id, comment.author.username)"
+                             ng-mouseleave="hideCommentUserInfo(feed.id, comment.id)" class="userInfoPopup" id="popupComment{{feed.id}}{{comment.id}}">
+                            <a href="#/users/feed.author.username">
+                                <img ng-src="{{comment.author.profileImageData || 'images/no-avatar.png'}}" width="35" height="35" />
+                                {{comment.author.name}}
+                            </a>
+                            <div class="popupFriendStatus" id="popupFriendStatus{{feed.id}}{{comment.id}}"></div>
+                        </div>
+                        <div class="comment-pic" ng-mouseover="showCommentUserInfo(feed.id, comment.id, comment.author.username)"
+                             ng-mouseleave="hideCommentUserInfo(feed.id, comment.id)">
                             <a href="#/users/{{comment.author.username}}"><img ng-src="{{comment.author.profileImageData || 'images/no-avatar.png'}}" height="35px" /></a>
                         </div>
                         <div class="comment-right">
