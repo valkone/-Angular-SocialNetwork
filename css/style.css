@@ -503,7 +503,7 @@ hr {
 
 .friend {
     background-color: #fff;
-    width: 96px;
+    width: 250px;
     padding: 20px 15px;
     text-align: center;
     word-wrap: break-word;
@@ -888,6 +888,6 @@ hr {
 
 }
 
-.feed-name, .feed-content {
+.feed-name, feed-content {
     word-wrap: break-word;
 }

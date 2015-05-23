@@ -64,11 +64,13 @@ app.controller('UserController', function($scope, $http, baseServiceUrl, userSer
                 authentication.GetHeaders(),
                 function(data){
                     $scope.friendFriends = data;
+                    $scope.friendsCount = data.length;
                 });
         } else {
             userService.getMyFriends(authentication.GetHeaders(),
             function(data){
                 $scope.friendFriends = data;
+                $scope.friendsCount = data.length;
             })
         }
     }
