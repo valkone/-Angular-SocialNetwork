@@ -441,11 +441,9 @@ hr {
 }
 
 .friend-review {
-    display: inline-block;
-    width: 83px;
+    display: block;
+    width: 203px;
     height: 83px;
-    padding: 4px;
-    text-align: center;
     margin-bottom: 25px;
 }
 

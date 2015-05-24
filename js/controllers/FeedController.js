@@ -56,7 +56,7 @@ app.controller('FeedController', function($scope, $sce, $http, baseServiceUrl, f
 
     $scope.postComment = function(postId) {
         var _this = this;
-        if(this.comment != null && this.comment != '') {
+        if(this.comment != null && this.comment != '' && this.comment.length > 1) {
             feedService.publishComment(postId,
                 {
                     commentContent: this.comment
@@ -71,13 +71,13 @@ app.controller('FeedController', function($scope, $sce, $http, baseServiceUrl, f
                     }
                 })
         } else {
-            notifyService.showError('The comment cannot be empty');
+            notifyService.showError('The comment should have at least 2 symbols');
         }
     };
 
     $scope.addPost = function(user) {
         var _this = this;
-        if(this.postContent) {
+        if(this.postContent && this.postContent.length > 1) {
             feedService.addPost(
                 {
                     postContent: this.postContent,
@@ -90,7 +90,7 @@ app.controller('FeedController', function($scope, $sce, $http, baseServiceUrl, f
                 }
             )
         } else {
-            notifyService.showError('The post cannot be empty');
+            notifyService.showError('The post should have at least 2 symbols');
         }
     };
 
