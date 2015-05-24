@@ -17,7 +17,7 @@ app.controller('UserController', function($scope, $http, baseServiceUrl, userSer
             var photofile = element.files[0];
             var reader = new FileReader();
             reader.onload = function(e) {
-                if(e.total <= 1280) {
+                if(e.total <= 128000) {
                     document.getElementById("avatarPic").src = e.target.result;
                 } else {
                     notifyService.showError('File too big');
@@ -32,7 +32,7 @@ app.controller('UserController', function($scope, $http, baseServiceUrl, userSer
             var photofile = element.files[0];
             var reader = new FileReader();
             reader.onload = function(e) {
-                if(e.total <= 1280) {
+                if(e.total <= 128000) {
                     document.getElementById("coverPic").src = e.target.result;
                 } else {
                     notifyService.showError('File too big');
