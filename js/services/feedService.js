@@ -182,7 +182,7 @@ app.factory('feedService', function ($http, baseServiceUrl, notifyService) {
 
     data.getNextWallFeeds = function(lastWallFeedId, wallOwner, headers, success) {
         $http({
-            method: 'get',
+            method: 'GET',
             url: baseServiceUrl + '/api/users/' + wallOwner + '/wall?StartPostId=' + lastWallFeedId + '&PageSize=10',
             headers: headers
         }).success(function(data){
