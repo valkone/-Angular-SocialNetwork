@@ -1,6 +1,20 @@
-app.controller('HeaderController', function($scope, authentication, headerService, notifyService, $location) {
+app.controller('HeaderController', function($scope, authentication, headerService, notifyService, $location, $route) {
     if(localStorage['username'] == undefined) {
         $location.path('/');
+    }
+
+    var route = $route.current.loadedTemplateUrl;
+
+    if(route == 'templates/partial/user.html') {
+        document.title = $route.current.params.username + ' Profile - Social Network';
+    } else if(route == 'templates/partial/feed.html') {
+        document.title = localStorage['username'] + ' Feed - Social Network';
+    } else if(route == 'templates/partial/profile.html') {
+        document.title = 'Profile - Social Network';
+    } else if(route == 'templates/partial/change-password.html') {
+        document.title = 'Change password - Social Network';
+    } else {
+        document.title = 'Friend List - Social Network';
     }
 
     $scope.userData = {};
