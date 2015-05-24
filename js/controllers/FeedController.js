@@ -287,6 +287,42 @@ app.controller('FeedController', function($scope, $sce, $http, baseServiceUrl, f
         }
     };
 
+
+
+
+    $scope.showFeedUserInfo = function(feedId, feedOwner) {
+        if(document.getElementById('popupFriendStatusFeed' + feedId)) {
+            if(document.getElementById('popupFriendStatusFeed' + feedId).innerText == '') {
+                document.getElementById('popupFeed' + feedId).style.display = 'block';
+                feedService.getUserPreviewData(feedOwner, authentication.GetHeaders(),
+                    function(data) {
+                        if(data.isFriend) {
+                            document.getElementById('popupFriendStatusFeed' + feedId).innerText = 'friend';
+                        } else if(data.hasPendingRequest) {
+                            document.getElementById('popupFriendStatusFeed' + feedId).innerText = 'pending';
+                        } else {
+                            document.getElementById('popupFriendStatusFeed' + feedId).innerHTML =
+                                '<a href="javascript: void(0);" username="' + feedOwner + '" id="test" onclick="angular.element(this).scope().addToFriendListFromPopup(this)">add to friend list</a>';
+                        }
+
+                    });
+            } else {
+                document.getElementById('popupFeed' + feedId).style.display = 'block';
+            }
+        }
+    };
+
+    $scope.hideFeedUserInfo = function(feedId) {
+        if(document.getElementById('popupFeed' + feedId)) {
+            document.getElementById('popupFeed' + feedId).style.display = 'none';
+        }
+    };
+
+
+
+
+
+
     $scope.addToFriendList = function(username) {
         userService.addToFriendList(username,
         authentication.GetHeaders(),
@@ -297,7 +333,6 @@ app.controller('FeedController', function($scope, $sce, $http, baseServiceUrl, f
 
     $scope.addToFriendListFromPopup = function(note) {
         var username = note.getAttribute('username');
-        alert(username);
         userService.addToFriendList(username,
             authentication.GetHeaders(),
             function(data){

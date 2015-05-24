@@ -6,11 +6,19 @@
         <div class="feed" ng-repeat="feed in feeds" id="feed{{feed.id}}">
             <div class="feed-header">
                 <div class="feed-header-left">
-                    <div class="feed-pic">
+                    <div class="feed-pic" ng-mouseover="showFeedUserInfo(feed.id, feed.author.username)"
+                         ng-mouseleave="hideFeedUserInfo(feed.id)">
                         <a href="#/users/{{feed.author.username}}"><img ng-src="{{feed.author.profileImageData || 'images/no-avatar.png'}}" height="48px" /></a>
                     </div>
                 </div>
-
+                <div style="display: none;" ng-if="feedOwner != feed.author.username" ng-mouseover="showFeedUserInfo(feed.id, feed.author.username)"
+                     ng-mouseleave="hideFeedUserInfo(feed.id)" class="userInfoPopup" id="popupFeed{{feed.id}}">
+                    <a href="#/users/{{feed.author.username}}">
+                        <img ng-src="{{feed.author.profileImageData || 'images/no-avatar.png'}}" width="35" height="35" />
+                        {{feed.author.name}}
+                    </a>
+                    <div class="popupFriendStatus" id="popupFriendStatusFeed{{feed.id}}"></div>
+                </div>
                 <div class="feed-header-right">
 
                     <div class="feed-name"><a href="#/users/{{feed.author.username}}">{{feed.author.name}}</a></div>
